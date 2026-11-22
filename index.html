@@ -57,6 +57,8 @@ body{
 .card.challenge:before{background:var(--red)}
 .card.challenge .art{background:#ffe9ea}
 .card.challenge .go{background:var(--red)}
+.card.baby:before{background:var(--pink)} .card.baby .art{background:#ffeaf4} .card.baby .go{background:var(--pink)}
+.card.multi:before{background:var(--teal)} .card.multi .art{background:#e7f8f8} .card.multi .go{background:var(--teal)}
 .card .art{width:78px;height:78px;border-radius:20px;flex:none;display:grid;place-items:center}
 .card.a .art{background:#fff1e3} .card.b .art{background:#e7f1ff} .card.c .art{background:#efe9ff}
 .card .art svg{width:58px;height:58px}
@@ -229,6 +231,21 @@ body{
 @keyframes boxjump{0%,100%{transform:translateY(0) rotate(-3deg)}50%{transform:translateY(-16px) rotate(3deg)}}
 .giftbox.open{animation:boxburst .6s ease-out forwards}
 @keyframes boxburst{0%{transform:scale(1)}40%{transform:scale(1.5) rotate(12deg)}100%{transform:scale(2.4) rotate(30deg);opacity:0}}
+.giftbox.gift-s0{animation:boxjump 1s ease-in-out infinite}
+.giftbox.gift-s0.open{animation:giftOpenPop .65s cubic-bezier(.2,1.6,.4,1) forwards}
+.giftbox.gift-s1{animation:giftSway 1.3s ease-in-out infinite}
+.giftbox.gift-s1.open{animation:giftOpenSpin .7s ease-in forwards}
+.giftbox.gift-s2{animation:giftFloat 1.1s ease-in-out infinite}
+.giftbox.gift-s2.open{animation:giftOpenRocket .7s cubic-bezier(.3,1.4,.5,1) forwards}
+.giftbox.gift-s3{animation:giftWiggle .9s ease-in-out infinite}
+.giftbox.gift-s3.open{animation:giftOpenZigzag .75s ease-in forwards}
+@keyframes giftOpenPop{0%{transform:scale(1)}45%{transform:scale(1.7) rotate(-8deg)}100%{transform:scale(2.5);opacity:0}}
+@keyframes giftOpenSpin{0%{transform:rotate(0) scale(1)}50%{transform:rotate(200deg) scale(1.4)}100%{transform:rotate(380deg) scale(2.3);opacity:0}}
+@keyframes giftOpenRocket{0%{transform:translateY(0) scale(1)}100%{transform:translateY(-260px) scale(2);opacity:0}}
+@keyframes giftOpenZigzag{0%{transform:translateX(0) scale(1)}25%{transform:translateX(-22px) scale(1.2)}50%{transform:translateX(22px) rotate(15deg) scale(1.5)}100%{transform:translateX(0) scale(2.2);opacity:0}}
+@keyframes giftSway{0%,100%{transform:rotate(-8deg)}50%{transform:rotate(8deg)}}
+@keyframes giftFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-18px)}}
+@keyframes giftWiggle{0%,100%{transform:skewX(-5deg)}50%{transform:skewX(5deg)}}
 .giftcap{margin-top:18px;font-size:26px;font-weight:900;color:#a8620e;text-shadow:0 2px 0 #fff8e0}
 .gifticon{width:260px;height:260px;display:none;filter:drop-shadow(0 12px 20px rgba(0,0,0,.2))}
 .gifticon svg{width:100%;height:100%;display:block}
@@ -242,6 +259,33 @@ body{
 .trophy svg{width:190px;height:190px;filter:drop-shadow(0 10px 24px rgba(240,150,30,.6))}
 .trophy .tw{margin-top:6px;font-size:26px;font-weight:900;color:#e07a12;-webkit-text-stroke:1.5px #fff}
 .hint{text-align:center;color:var(--muted);font-size:12px;margin-top:20px;line-height:1.7}
+/* battle mode */
+.battlebar{display:none;align-items:center;gap:10px;background:linear-gradient(135deg,#e7f8f8,#eef6ff);border:2px solid #bfe4e4;
+  border-radius:16px;padding:10px 14px;margin-bottom:10px}
+.battlebar.on{display:flex}
+.battlebar .who{font-size:17px;font-weight:900;color:var(--teal-d);white-space:nowrap}
+.battlebar .plist{display:flex;gap:8px;flex-wrap:wrap;font-size:12px;font-weight:800;color:#4b6070}
+.battlebar .plist b{color:var(--orange)}
+.battlebar .plist span.sel{color:var(--teal-d);text-decoration:underline;text-underline-offset:3px}
+.setup{display:flex;flex-direction:column;gap:16px;margin-top:18px}
+.setup h2{margin:0;font-size:20px;color:var(--teal-d)}
+.setup .row{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+.chip{border:2px solid var(--line);background:#fff;border-radius:999px;padding:10px 18px;font-weight:800;font-size:15px;
+  cursor:pointer;color:var(--ink);box-shadow:0 3px 8px rgba(0,0,0,.05)}
+.chip.sel{border-color:var(--teal);background:#e7f8f8;color:var(--teal-d)}
+.setup .chip{font-size:14px;padding:9px 14px;max-width:100%}
+.setup .btn{align-self:center;width:100%;max-width:330px}
+/* baby mode */
+body.babymode .qcard{border-color:#f5b6d2;background:linear-gradient(180deg,#fffafc,#fff7fb)}
+body.babymode .qtitle{color:#c94f87}
+body.babymode .scene{background:radial-gradient(circle at 50% 30%,#fff0f7,#fff)}
+.cute-layer{position:fixed;inset:0;z-index:66;pointer-events:none;overflow:hidden}
+.cute{position:absolute;top:-70px;animation:cuteFall linear forwards;filter:drop-shadow(0 4px 8px rgba(0,0,0,.12))}
+.cute svg{width:100%;height:100%;display:block}
+@keyframes cuteFall{0%{transform:translateY(0) rotate(0);opacity:0}12%{opacity:1}100%{transform:translateY(115vh) rotate(540deg);opacity:0}}
+.cute-word{position:absolute;left:50%;top:24%;transform:translateX(-50%);font-size:clamp(36px,9vw,68px);font-weight:900;
+  color:#e35b96;-webkit-text-stroke:2px #fff;text-shadow:0 6px 18px rgba(227,91,150,.35);animation:cuteWord 1.5s ease-out forwards}
+@keyframes cuteWord{0%{transform:translateX(-50%) scale(.2)}55%{transform:translateX(-50%) scale(1.3)}100%{transform:translateX(-50%) scale(1);opacity:0}}
 </style>
 </head>
 <body>
@@ -267,6 +311,16 @@ body{
       </div>
     </div>
     <div class="cards">
+      <div class="card baby" onclick="openBook('N')">
+        <div class="art"><svg viewBox="0 0 60 60"><circle cx="30" cy="32" r="20" fill="#f7b7d2"/><circle cx="23" cy="29" r="3" fill="#1f2733"/><circle cx="37" cy="29" r="3" fill="#1f2733"/><path d="M22 39q8 8 16 0" stroke="#1f2733" stroke-width="3" fill="none" stroke-linecap="round"/><path d="M12 14l8 8M48 14l-8 8" stroke="#e46ba8" stroke-width="4" stroke-linecap="round"/></svg></div>
+        <div class="txt"><h2 data-i18n="babyBook">N-K1 · 啟蒙樂園</h2><p data-i18n="babyBookD">1–5 點數、找一樣、配顏色、大細、框入面</p></div>
+        <div class="go" data-i18n="go">開始</div>
+      </div>
+      <div class="card multi" onclick="openBattleSetup()">
+        <div class="art"><svg viewBox="0 0 60 60"><circle cx="22" cy="28" r="12" fill="#f2b32e"/><circle cx="40" cy="28" r="12" fill="#3a86d4"/><circle cx="18" cy="25" r="2" fill="#1f2733"/><circle cx="26" cy="25" r="2" fill="#1f2733"/><circle cx="36" cy="25" r="2" fill="#1f2733"/><circle cx="44" cy="25" r="2" fill="#1f2733"/><path d="M18 32q4 4 8 0M36 32q4 4 8 0" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg></div>
+        <div class="txt"><h2 data-i18n="battle">多人對戰 · 2–4 人</h2><p data-i18n="battleD">同一部機輪流答，計分決出冠軍</p></div>
+        <div class="go" data-i18n="goBattle">對戰</div>
+      </div>
       <div class="card a" onclick="openBook('A')">
         <div class="art"><svg viewBox="0 0 60 60"><circle cx="20" cy="38" r="10" fill="#e5484d"/><circle cx="40" cy="38" r="10" fill="#3a86d4"/><circle cx="30" cy="24" r="10" fill="#f2b32e"/><text x="30" y="28" text-anchor="middle" font-size="11" fill="#fff" font-weight="800">123</text></svg></div>
         <div class="txt"><h2 data-i18n="bookA">Book A · 數感基礎</h2><p data-i18n="bookAd">數數、相鄰數、順倒數、比大小、數字迷宮</p></div>
@@ -298,6 +352,27 @@ body{
     <div class="levels" id="lvGrid"></div>
   </section>
 
+  <!-- BATTLE SETUP -->
+  <section class="screen" id="battleSetup">
+    <div class="bar"><button class="back" onclick="showHome()" data-i18n="back">← 返回</button><div class="title" data-i18n="battleTitle">多人對戰</div></div>
+    <div class="setup">
+      <h2 data-i18n="choosePlayers">幾多位玩家？</h2>
+      <div class="row" id="playerChoices">
+        <button class="chip sel" onclick="setBattlePlayers(2)">2</button>
+        <button class="chip" onclick="setBattlePlayers(3)">3</button>
+        <button class="chip" onclick="setBattlePlayers(4)">4</button>
+      </div>
+      <h2 data-i18n="chooseBook">選練習冊</h2>
+      <div class="row" id="bookChoices">
+        <button class="chip sel" data-b="A" onclick="setBattleBook('A')" data-i18n="bookA">Book A</button>
+        <button class="chip" data-b="B" onclick="setBattleBook('B')" data-i18n="bookB">Book B</button>
+        <button class="chip" data-b="C" onclick="setBattleBook('C')" data-i18n="bookC">Book C</button>
+        <button class="chip" data-b="M" onclick="setBattleBook('M')" data-i18n="mix">混合</button>
+      </div>
+      <button class="btn" id="battleStart" onclick="startBattle()" data-i18n="battleStart">開始對戰</button>
+    </div>
+  </section>
+
   <!-- PLAY -->
   <section class="screen" id="play">
     <div class="phead">
@@ -305,6 +380,7 @@ body{
       <div class="dots" id="dots"></div>
       <div class="combo hide" id="combo">連擊 x0</div>
     </div>
+    <div class="battlebar" id="battleBar"><div class="who" id="battleWho"></div><div class="plist" id="battleList"></div></div>
     <div class="timebar"><div class="timefill" id="timefill"></div></div>
     <div class="pmeta"><span><span data-i18n="qno">第</span> <b id="qno">1</b> <span data-i18n="qof" data-v="5">/ 5 題</span></span><span><span data-i18n="score">得分</span> <b id="scoreNow">0</b></span></div>
     <div class="qcard">
@@ -356,6 +432,10 @@ function lt(q,k){return LANG==='en'&&q.en&&q.en[k]?q.en[k]:q[k];}
 const I18N={
  zh:{
   brand:'啟展數學樂園 / KeeGee Math Land',app:'啟展數學樂園',sub:'K2 遊戲',
+  babyBook:'N-K1 · 啟蒙樂園',babyBookD:'1–5 點數、找一樣、配顏色、大細、框入面',
+  battle:'多人對戰 · 2–4 人',battleD:'同一部機輪流答，計分決出冠軍',goBattle:'對戰',
+  battleTitle:'多人對戰',choosePlayers:'幾多位玩家？',chooseBook:'選練習冊',mix:'混合',battleStart:'開始對戰',
+  battleTurn:'玩家 {n} 回合',battleEnd:'對戰結束！',battleRank:'第 {n} 名：玩家 {p} · {s} 分',babyCute:'好可愛！',
   hero1:'一起來玩數學吧！',hero2:'選一本，聽著聲音、拿星星，邊玩邊學會競賽題',
   music:'音樂',read:'讀題',replay:'再聽一次',lang:'EN',
   collect:'我的收藏',locked:'未解鎖',
@@ -381,6 +461,10 @@ const I18N={
  },
  en:{
   brand:'啟展數學樂園 / KeeGee Math Land',app:'KeeGee Math Land',sub:'K2 Games',
+  babyBook:'N-K1 · Baby Land',babyBookD:'Count 1–5, match pictures, colours, big and small',
+  battle:'Multiplayer · 2–4 players',battleD:'Take turns on one device. Highest score wins.',goBattle:'Battle',
+  battleTitle:'Multiplayer battle',choosePlayers:'How many players?',chooseBook:'Choose a book',mix:'Mixed',battleStart:'Start battle',
+  battleTurn:'Player {n} turn',battleEnd:'Battle finished!',battleRank:'#{n}: Player {p} · {s} pts',babyCute:'So cute!',
   hero1:"Let's play maths!",hero2:'Pick a book, listen, collect stars and learn contest questions',
   music:'Music',read:'Read',replay:'Play again',lang:'中',
   collect:'My collection',locked:'Locked',
@@ -415,6 +499,7 @@ function applyLang(){
   document.title='啟展數學樂園 / KeeGee Math Land';
   document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=t(el.dataset.i18n,el.dataset.v?{n:el.dataset.v}:null);});
   if(typeof renderTrophy==='function')renderTrophy();
+  if(typeof updateBattleBar==='function')updateBattleBar();
   let lb=document.getElementById('langBtn');if(lb)lb.textContent=t('lang');
   if(document.getElementById('home').classList.contains('on'))showHome();
   if(document.getElementById('levels').classList.contains('on'))openBook(curBook||'A');
@@ -431,6 +516,10 @@ const MARKS=[
 const MARK_LABEL=['紅色圓形','藍色方形','綠色三角形','黃色星星'];
 function markSvg(i,x,y,s){return `<svg x="${x-s/2}" y="${y-s/2}" width="${s}" height="${s}" viewBox="0 0 36 36">${MARKS[i]}</svg>`;}
 function markOpt(i){return {t:'',v:i,svg:MARKS[i],label:MARK_LABEL[i]};}
+/* direct visual options — the answer button shows the SAME object/colour/shape as the scene */
+function iconOpt(k,col){return {t:'',v:k,svg:`<svg viewBox="0 0 64 64">${icon(k,32,34,24,col||C.blue)}</svg>`,label:NAME[k]||'',labelEn:NAME_EN[k]||''};}
+function barOpt(w,col){let h=w/4,y=(64-h)/2;return {t:'',v:w,svg:`<svg viewBox="0 0 64 64"><rect x="4" y="${y}" width="${w/3}" height="${h}" rx="5" fill="${col}"/></svg>`,label:''};}
+function stickOpt(cnt){let lines='';for(let j=0;j<cnt;j++)lines+=`<line x1="12" y1="${8+j*(44/Math.max(cnt,1))}" x2="52" y2="${8+j*(44/Math.max(cnt,1))}" stroke="${C.brown}" stroke-width="4" stroke-linecap="round"/>`;return {t:'',v:cnt,svg:`<svg viewBox="0 0 64 64">${lines}</svg>`,label:''};}
 function icon(k,x,y,s,col){
   k=k;
   if(k==='apple')return `<circle cx="${x}" cy="${y+3}" r="${s}" fill="${col}"/><path d="M${x} ${y-s+3} q${s*.5} ${-s*.7} ${s*.9} ${-s*.1}" stroke="#4a7c34" stroke-width="${s*.16}" fill="none"/><ellipse cx="${x-s*.35}" cy="${y-s*.3}" rx="${s*.18}" ry="${s*.3}" fill="#fff" opacity=".35"/>`;
@@ -481,7 +570,7 @@ function sfx(k){
 const MEL=[523,659,784,659,587,698,880,698,523,659,784,1047,880,784,659,587];
 function startBgm(){if(bgmTimer)return;ensureAudio();musicOn=true;bgmTimer=setInterval(()=>{tone(MEL[bgmStep%MEL.length]*.5,.3,'triangle',.035);bgmStep++;},330);}
 function stopBgm(){musicOn=false;if(bgmTimer)clearInterval(bgmTimer);bgmTimer=null;}
-const AUDIO_MAP={"1 和 10，應該用大於還是小於？記住開口向住大嘅數。":"000.mp3","1 和 2，應該用大於還是小於？記住開口向住大嘅數。":"001.mp3","1 和 3，應該用大於還是小於？記住開口向住大嘅數。":"002.mp3","1 和 4，應該用大於還是小於？記住開口向住大嘅數。":"003.mp3","1 和 5，應該用大於還是小於？記住開口向住大嘅數。":"004.mp3","1 和 6，應該用大於還是小於？記住開口向住大嘅數。":"005.mp3","1 和 7，應該用大於還是小於？記住開口向住大嘅數。":"006.mp3","1 和 8，應該用大於還是小於？記住開口向住大嘅數。":"007.mp3","1 和 9，應該用大於還是小於？記住開口向住大嘅數。":"008.mp3","10 和 1，應該用大於還是小於？記住開口向住大嘅數。":"009.mp3","10 和 2，應該用大於還是小於？記住開口向住大嘅數。":"010.mp3","10 和 3，應該用大於還是小於？記住開口向住大嘅數。":"011.mp3","10 和 4，應該用大於還是小於？記住開口向住大嘅數。":"012.mp3","10 和 5，應該用大於還是小於？記住開口向住大嘅數。":"013.mp3","10 和 6，應該用大於還是小於？記住開口向住大嘅數。":"014.mp3","10 和 7，應該用大於還是小於？記住開口向住大嘅數。":"015.mp3","10 和 8，應該用大於還是小於？記住開口向住大嘅數。":"016.mp3","10 和 9，應該用大於還是小於？記住開口向住大嘅數。":"017.mp3","2 和 10，應該用大於還是小於？記住開口向住大嘅數。":"018.mp3","2 和 1，應該用大於還是小於？記住開口向住大嘅數。":"019.mp3","2 和 3，應該用大於還是小於？記住開口向住大嘅數。":"020.mp3","2 和 4，應該用大於還是小於？記住開口向住大嘅數。":"021.mp3","2 和 5，應該用大於還是小於？記住開口向住大嘅數。":"022.mp3","2 和 6，應該用大於還是小於？記住開口向住大嘅數。":"023.mp3","2 和 7，應該用大於還是小於？記住開口向住大嘅數。":"024.mp3","2 和 8，應該用大於還是小於？記住開口向住大嘅數。":"025.mp3","2 和 9，應該用大於還是小於？記住開口向住大嘅數。":"026.mp3","3 和 10，應該用大於還是小於？記住開口向住大嘅數。":"027.mp3","3 和 1，應該用大於還是小於？記住開口向住大嘅數。":"028.mp3","3 和 2，應該用大於還是小於？記住開口向住大嘅數。":"029.mp3","3 和 4，應該用大於還是小於？記住開口向住大嘅數。":"030.mp3","3 和 5，應該用大於還是小於？記住開口向住大嘅數。":"031.mp3","3 和 6，應該用大於還是小於？記住開口向住大嘅數。":"032.mp3","3 和 7，應該用大於還是小於？記住開口向住大嘅數。":"033.mp3","3 和 8，應該用大於還是小於？記住開口向住大嘅數。":"034.mp3","3 和 9，應該用大於還是小於？記住開口向住大嘅數。":"035.mp3","4 和 10，應該用大於還是小於？記住開口向住大嘅數。":"036.mp3","4 和 1，應該用大於還是小於？記住開口向住大嘅數。":"037.mp3","4 和 2，應該用大於還是小於？記住開口向住大嘅數。":"038.mp3","4 和 3，應該用大於還是小於？記住開口向住大嘅數。":"039.mp3","4 和 5，應該用大於還是小於？記住開口向住大嘅數。":"040.mp3","4 和 6，應該用大於還是小於？記住開口向住大嘅數。":"041.mp3","4 和 7，應該用大於還是小於？記住開口向住大嘅數。":"042.mp3","4 和 8，應該用大於還是小於？記住開口向住大嘅數。":"043.mp3","4 和 9，應該用大於還是小於？記住開口向住大嘅數。":"044.mp3","5 和 10，應該用大於還是小於？記住開口向住大嘅數。":"045.mp3","5 和 1，應該用大於還是小於？記住開口向住大嘅數。":"046.mp3","5 和 2，應該用大於還是小於？記住開口向住大嘅數。":"047.mp3","5 和 3，應該用大於還是小於？記住開口向住大嘅數。":"048.mp3","5 和 4，應該用大於還是小於？記住開口向住大嘅數。":"049.mp3","5 和 6，應該用大於還是小於？記住開口向住大嘅數。":"050.mp3","5 和 7，應該用大於還是小於？記住開口向住大嘅數。":"051.mp3","5 和 8，應該用大於還是小於？記住開口向住大嘅數。":"052.mp3","5 和 9，應該用大於還是小於？記住開口向住大嘅數。":"053.mp3","6 和 10，應該用大於還是小於？記住開口向住大嘅數。":"054.mp3","6 和 1，應該用大於還是小於？記住開口向住大嘅數。":"055.mp3","6 和 2，應該用大於還是小於？記住開口向住大嘅數。":"056.mp3","6 和 3，應該用大於還是小於？記住開口向住大嘅數。":"057.mp3","6 和 4，應該用大於還是小於？記住開口向住大嘅數。":"058.mp3","6 和 5，應該用大於還是小於？記住開口向住大嘅數。":"059.mp3","6 和 7，應該用大於還是小於？記住開口向住大嘅數。":"060.mp3","6 和 8，應該用大於還是小於？記住開口向住大嘅數。":"061.mp3","6 和 9，應該用大於還是小於？記住開口向住大嘅數。":"062.mp3","7 和 10，應該用大於還是小於？記住開口向住大嘅數。":"063.mp3","7 和 1，應該用大於還是小於？記住開口向住大嘅數。":"064.mp3","7 和 2，應該用大於還是小於？記住開口向住大嘅數。":"065.mp3","7 和 3，應該用大於還是小於？記住開口向住大嘅數。":"066.mp3","7 和 4，應該用大於還是小於？記住開口向住大嘅數。":"067.mp3","7 和 5，應該用大於還是小於？記住開口向住大嘅數。":"068.mp3","7 和 6，應該用大於還是小於？記住開口向住大嘅數。":"069.mp3","7 和 8，應該用大於還是小於？記住開口向住大嘅數。":"070.mp3","7 和 9，應該用大於還是小於？記住開口向住大嘅數。":"071.mp3","8 和 10，應該用大於還是小於？記住開口向住大嘅數。":"072.mp3","8 和 1，應該用大於還是小於？記住開口向住大嘅數。":"073.mp3","8 和 2，應該用大於還是小於？記住開口向住大嘅數。":"074.mp3","8 和 3，應該用大於還是小於？記住開口向住大嘅數。":"075.mp3","8 和 4，應該用大於還是小於？記住開口向住大嘅數。":"076.mp3","8 和 5，應該用大於還是小於？記住開口向住大嘅數。":"077.mp3","8 和 6，應該用大於還是小於？記住開口向住大嘅數。":"078.mp3","8 和 7，應該用大於還是小於？記住開口向住大嘅數。":"079.mp3","8 和 9，應該用大於還是小於？記住開口向住大嘅數。":"080.mp3","9 和 10，應該用大於還是小於？記住開口向住大嘅數。":"081.mp3","9 和 1，應該用大於還是小於？記住開口向住大嘅數。":"082.mp3","9 和 2，應該用大於還是小於？記住開口向住大嘅數。":"083.mp3","9 和 3，應該用大於還是小於？記住開口向住大嘅數。":"084.mp3","9 和 4，應該用大於還是小於？記住開口向住大嘅數。":"085.mp3","9 和 5，應該用大於還是小於？記住開口向住大嘅數。":"086.mp3","9 和 6，應該用大於還是小於？記住開口向住大嘅數。":"087.mp3","9 和 7，應該用大於還是小於？記住開口向住大嘅數。":"088.mp3","9 和 8，應該用大於還是小於？記住開口向住大嘅數。":"089.mp3","小於":"090.mp3","大於":"091.mp3","一起來玩數學":"092.mp3","三組兔仔，哪一組最多？":"093.mp3","三組兔仔，哪一組最少？":"094.mp3","三組小貓，哪一組最多？":"095.mp3","三組小貓，哪一組最少？":"096.mp3","三組小魚，哪一組最多？":"097.mp3","三組小魚，哪一組最少？":"098.mp3","三組小鳥，哪一組最多？":"099.mp3","三組小鳥，哪一組最少？":"100.mp3","三組心心，哪一組最多？":"101.mp3","三組心心，哪一組最少？":"102.mp3","三組星星，哪一組最多？":"103.mp3","三組星星，哪一組最少？":"104.mp3","三組檸檬，哪一組最多？":"105.mp3","三組檸檬，哪一組最少？":"106.mp3","三組氣球，哪一組最多？":"107.mp3","三組氣球，哪一組最少？":"108.mp3","三組花朵，哪一組最多？":"109.mp3","三組花朵，哪一組最少？":"110.mp3","三組草莓，哪一組最多？":"111.mp3","三組草莓，哪一組最少？":"112.mp3","三組蘋果，哪一組最多？":"113.mp3","三組蘋果，哪一組最少？":"114.mp3","三組蝴蝶，哪一組最多？":"115.mp3","三組蝴蝶，哪一組最少？":"116.mp3","倒數 10 到 1":"117.mp3","倒數迷宮，由十按到一，不要走回頭路。":"118.mp3","倒數，空格應填甚麼？":"119.mp3","哪一棟最矮？要比同一條底線。":"120.mp3","哪一棟最高？要比同一條底線。":"121.mp3","哪隻小貓離城堡最近？":"122.mp3","哪隻小貓離城堡最遠？":"123.mp3","圈出和左邊一樣的圖形。":"124.mp3","太棒了，你拿到星星了":"125.mp3","找一找，哪一個和別的顏色不同？點佢。":"126.mp3","數一數左邊有幾個，再圈出一樣多的火柴。":"127.mp3","數一數，有幾多兔仔？一個一個慢慢數。":"128.mp3","數一數，有幾多小貓？一個一個慢慢數。":"129.mp3","數一數，有幾多小魚？一個一個慢慢數。":"130.mp3","數一數，有幾多小鳥？一個一個慢慢數。":"131.mp3","數一數，有幾多心心？一個一個慢慢數。":"132.mp3","數一數，有幾多星星？一個一個慢慢數。":"133.mp3","數一數，有幾多檸檬？一個一個慢慢數。":"134.mp3","數一數，有幾多氣球？一個一個慢慢數。":"135.mp3","數一數，有幾多花朵？一個一個慢慢數。":"136.mp3","數一數，有幾多草莓？一個一個慢慢數。":"137.mp3","數一數，有幾多蘋果？一個一個慢慢數。":"138.mp3","數一數，有幾多蝴蝶？一個一個慢慢數。":"139.mp3","數字列車，2 的前面一個數是甚麼？":"140.mp3","數字列車，2 的後面一個數是甚麼？":"141.mp3","數字列車，3 的前面一個數是甚麼？":"142.mp3","數字列車，3 的後面一個數是甚麼？":"143.mp3","數字列車，4 的前面一個數是甚麼？":"144.mp3","數字列車，4 的後面一個數是甚麼？":"145.mp3","數字列車，5 的前面一個數是甚麼？":"146.mp3","數字列車，5 的後面一個數是甚麼？":"147.mp3","數字列車，6 的前面一個數是甚麼？":"148.mp3","數字列車，6 的後面一個數是甚麼？":"149.mp3","數字列車，7 的前面一個數是甚麼？":"150.mp3","數字列車，7 的後面一個數是甚麼？":"151.mp3","數字列車，8 的前面一個數是甚麼？":"152.mp3","數字列車，8 的後面一個數是甚麼？":"153.mp3","數字列車，9 的前面一個數是甚麼？":"154.mp3","數字列車，9 的後面一個數是甚麼？":"155.mp3","有幾個三角形？":"156.mp3","有幾個圓形？":"157.mp3","正確答案是0":"158.mp3","正確答案是1":"159.mp3","正確答案是10":"160.mp3","正確答案是11":"161.mp3","正確答案是12":"162.mp3","正確答案是13":"163.mp3","正確答案是14":"164.mp3","正確答案是15":"165.mp3","正確答案是16":"166.mp3","正確答案是17":"167.mp3","正確答案是18":"168.mp3","正確答案是19":"169.mp3","正確答案是2":"170.mp3","正確答案是20":"171.mp3","正確答案是3":"172.mp3","正確答案是4":"173.mp3","正確答案是5":"174.mp3","正確答案是6":"175.mp3","正確答案是7":"176.mp3","正確答案是8":"177.mp3","正確答案是9":"178.mp3","正確答案是小於":"179.mp3","正確答案是大於":"180.mp3","正確答案是倒數 10 到 1":"181.mp3","正確答案是紅色圓形":"182.mp3","正確答案是綠色三角形":"183.mp3","正確答案是藍色方形":"184.mp3","正確答案是順數 1 到 10":"185.mp3","正確答案是顏色不同的那個":"186.mp3","正確答案是黃色星星":"187.mp3","正確答案是黃色框入面嘅物件":"188.mp3","比 2 多一 的數是甚麼？":"189.mp3","比 2 少一 的數是甚麼？":"190.mp3","比 3 多一 的數是甚麼？":"191.mp3","比 3 少一 的數是甚麼？":"192.mp3","比 4 多一 的數是甚麼？":"193.mp3","比 4 少一 的數是甚麼？":"194.mp3","比 5 多一 的數是甚麼？":"195.mp3","比 5 少一 的數是甚麼？":"196.mp3","比 6 多一 的數是甚麼？":"197.mp3","比 6 少一 的數是甚麼？":"198.mp3","比 7 多一 的數是甚麼？":"199.mp3","比 7 少一 的數是甚麼？":"200.mp3","比 8 多一 的數是甚麼？":"201.mp3","比 8 少一 的數是甚麼？":"202.mp3","看規律，下一個圖案是甚麼？":"203.mp3","看規律，空格應填甚麼？每次加 1。":"204.mp3","看規律，空格應填甚麼？每次加 2。":"205.mp3","睇下黃色框喺邊度，點一下框入面嘅嘢。":"206.mp3","答對了，好厲害！":"207.mp3","紅色圓形":"208.mp3","綠色三角形":"209.mp3","藍色方形":"210.mp3","超級厲害，你是數學小天才！":"211.mp3","連續答對10題":"212.mp3","連續答對11題":"213.mp3","連續答對12題":"214.mp3","連續答對13題":"215.mp3","連續答對14題":"216.mp3","連續答對15題":"217.mp3","連續答對16題":"218.mp3","連續答對17題":"219.mp3","連續答對18題":"220.mp3","連續答對19題":"221.mp3","連續答對1題":"222.mp3","連續答對20題":"223.mp3","連續答對2題":"224.mp3","連續答對3題":"225.mp3","連續答對4題":"226.mp3","連續答對5題":"227.mp3","連續答對6題":"228.mp3","連續答對7題":"229.mp3","連續答對8題":"230.mp3","連續答對9題":"231.mp3","連續答對，太厲害了！":"232.mp3","順數 1 到 10":"233.mp3","順數迷宮，由一起按到十，不要走回頭路。":"234.mp3","順數，空格應填甚麼？":"235.mp3","顏色不同的那個":"236.mp3","黃色星星":"237.mp3","黃色框入面嘅物件":"238.mp3","正確答案是圓形":"239.mp3","正確答案是方形":"240.mp3","正確答案是三角形":"241.mp3","嘩！有驚喜禮物！快啲點開佢！":"242.mp3","恭喜！你解鎖咗新獎盃！":"243.mp3","你的收藏又多咗一件！":"244.mp3","你收到小貓！":"245.mp3","你收到兔仔！":"246.mp3","你收到小魚！":"247.mp3","你收到小鳥！":"248.mp3","你收到蝴蝶！":"249.mp3","你收到心心！":"250.mp3","你收到星星！":"251.mp3","你收到花朵！":"252.mp3","你收到氣球！":"253.mp3","你收到草莓！":"254.mp3","你收到檸檬！":"255.mp3","你收到蘋果！":"256.mp3","繼續努力，仲有驚喜等住你！":"257.mp3","再試一次，加油！":"258.mp3","哇！恭喜！你解鎖咗新獎盃！":"259.mp3","哇！連續答對！你真係好叻呀！":"260.mp3","嘩！你攞到星星啦！太棒啦！":"261.mp3","嘩！有驚喜！快啲點開禮物呀！":"262.mp3","嘩！答對咗！好叻呀！":"263.mp3","嘩！超級棒！你係數學小天才呀！":"264.mp3","時間到！下次快啲！":"265.mp3","正確答案是這個":"266.mp3","Count from the left. Which number is it?":"267.mp3","Count the blocks. How many are there?":"268.mp3","Count the pictures. How many are there?":"269.mp3","Count the pictures. Which group has the same number?":"270.mp3","Fantastic! You are a maths superstar!":"271.mp3","Find the one that is a different colour. Touch it.":"272.mp3","Find the shape that is the same as this one.":"273.mp3","Good try! Have another go!":"274.mp3","How many altogether? Count them all.":"275.mp3","Let us play maths!":"276.mp3","Look at the pattern. What comes next?":"277.mp3","Look at the pattern. Which number is missing?":"278.mp3","Look at the yellow box. Tap what is inside it.":"279.mp3","The answer is 1 to 10":"280.mp3","The answer is 10 to 1":"281.mp3","The answer is circle":"282.mp3","The answer is square":"283.mp3","The answer is the object in the yellow box":"284.mp3","The answer is the one with a different colour":"285.mp3","The answer is this one":"286.mp3","The answer is triangle":"287.mp3","Time's up! Try to be quicker!":"288.mp3","Welcome to KeeGee Math Land!":"289.mp3","Which one is different from the others?":"290.mp3","Which sign is correct? The big mouth faces the bigger number.":"291.mp3","Wow! Congratulations! A new trophy!":"292.mp3","Wow! Correct! Well done!":"293.mp3","Wow, a streak! You are amazing!":"294.mp3","Wow, a surprise! Tap to open it!":"295.mp3","Yay! You earned a star! Great job!":"296.mp3","You got 1 in a row!":"297.mp3","You got 10 in a row!":"298.mp3","You got 2 in a row!":"299.mp3","You got 3 in a row!":"300.mp3","You got 4 in a row!":"301.mp3","You got 5 in a row!":"302.mp3","You got 6 in a row!":"303.mp3","You got 7 in a row!":"304.mp3","You got 8 in a row!":"305.mp3","You got 9 in a row!":"306.mp3","You got apple!":"307.mp3","You got balloon!":"308.mp3","You got bird!":"309.mp3","You got bunny!":"310.mp3","You got butterfly!":"311.mp3","You got fish!":"312.mp3","You got flower!":"313.mp3","You got heart!":"314.mp3","You got kitten!":"315.mp3","You got lemon!":"316.mp3","You got star!":"317.mp3","You got strawberry!":"318.mp3","數一數，有幾多塊積木？一塊一塊慢慢數。":"319.mp3","由左邊數，黃色框係第幾個？":"320.mp3","找一找，邊一個和其他唔同類？":"321.mp3","哪一條最短？":"322.mp3","哪一條最長？":"323.mp3","兩堆合起來，一共有幾個？數一數。":"324.mp3","Which number comes just after?":"325.mp3","Which number comes just before?":"326.mp3","Counting up. Which number is missing?":"327.mp3","Counting down. Which number is missing?":"328.mp3","Which group has the most?":"329.mp3","Which group has the fewest?":"330.mp3","What number is one more?":"331.mp3","What number is one less?":"332.mp3","Which one is the tallest?":"333.mp3","Which one is the shortest?":"334.mp3","Which cat is nearest?":"335.mp3","Which cat is farthest?":"336.mp3","How many triangles?":"337.mp3","How many circles?":"338.mp3","Start at one. Tap the numbers in order up to ten.":"339.mp3","Start at ten. Tap the numbers in order down to one.":"340.mp3","Which one is the longest?":"341.mp3"};
+const AUDIO_MAP={"1 和 10，應該用大於還是小於？記住開口向住大嘅數。":"000.mp3","1 和 2，應該用大於還是小於？記住開口向住大嘅數。":"001.mp3","1 和 3，應該用大於還是小於？記住開口向住大嘅數。":"002.mp3","1 和 4，應該用大於還是小於？記住開口向住大嘅數。":"003.mp3","1 和 5，應該用大於還是小於？記住開口向住大嘅數。":"004.mp3","1 和 6，應該用大於還是小於？記住開口向住大嘅數。":"005.mp3","1 和 7，應該用大於還是小於？記住開口向住大嘅數。":"006.mp3","1 和 8，應該用大於還是小於？記住開口向住大嘅數。":"007.mp3","1 和 9，應該用大於還是小於？記住開口向住大嘅數。":"008.mp3","10 和 1，應該用大於還是小於？記住開口向住大嘅數。":"009.mp3","10 和 2，應該用大於還是小於？記住開口向住大嘅數。":"010.mp3","10 和 3，應該用大於還是小於？記住開口向住大嘅數。":"011.mp3","10 和 4，應該用大於還是小於？記住開口向住大嘅數。":"012.mp3","10 和 5，應該用大於還是小於？記住開口向住大嘅數。":"013.mp3","10 和 6，應該用大於還是小於？記住開口向住大嘅數。":"014.mp3","10 和 7，應該用大於還是小於？記住開口向住大嘅數。":"015.mp3","10 和 8，應該用大於還是小於？記住開口向住大嘅數。":"016.mp3","10 和 9，應該用大於還是小於？記住開口向住大嘅數。":"017.mp3","2 和 10，應該用大於還是小於？記住開口向住大嘅數。":"018.mp3","2 和 1，應該用大於還是小於？記住開口向住大嘅數。":"019.mp3","2 和 3，應該用大於還是小於？記住開口向住大嘅數。":"020.mp3","2 和 4，應該用大於還是小於？記住開口向住大嘅數。":"021.mp3","2 和 5，應該用大於還是小於？記住開口向住大嘅數。":"022.mp3","2 和 6，應該用大於還是小於？記住開口向住大嘅數。":"023.mp3","2 和 7，應該用大於還是小於？記住開口向住大嘅數。":"024.mp3","2 和 8，應該用大於還是小於？記住開口向住大嘅數。":"025.mp3","2 和 9，應該用大於還是小於？記住開口向住大嘅數。":"026.mp3","3 和 10，應該用大於還是小於？記住開口向住大嘅數。":"027.mp3","3 和 1，應該用大於還是小於？記住開口向住大嘅數。":"028.mp3","3 和 2，應該用大於還是小於？記住開口向住大嘅數。":"029.mp3","3 和 4，應該用大於還是小於？記住開口向住大嘅數。":"030.mp3","3 和 5，應該用大於還是小於？記住開口向住大嘅數。":"031.mp3","3 和 6，應該用大於還是小於？記住開口向住大嘅數。":"032.mp3","3 和 7，應該用大於還是小於？記住開口向住大嘅數。":"033.mp3","3 和 8，應該用大於還是小於？記住開口向住大嘅數。":"034.mp3","3 和 9，應該用大於還是小於？記住開口向住大嘅數。":"035.mp3","4 和 10，應該用大於還是小於？記住開口向住大嘅數。":"036.mp3","4 和 1，應該用大於還是小於？記住開口向住大嘅數。":"037.mp3","4 和 2，應該用大於還是小於？記住開口向住大嘅數。":"038.mp3","4 和 3，應該用大於還是小於？記住開口向住大嘅數。":"039.mp3","4 和 5，應該用大於還是小於？記住開口向住大嘅數。":"040.mp3","4 和 6，應該用大於還是小於？記住開口向住大嘅數。":"041.mp3","4 和 7，應該用大於還是小於？記住開口向住大嘅數。":"042.mp3","4 和 8，應該用大於還是小於？記住開口向住大嘅數。":"043.mp3","4 和 9，應該用大於還是小於？記住開口向住大嘅數。":"044.mp3","5 和 10，應該用大於還是小於？記住開口向住大嘅數。":"045.mp3","5 和 1，應該用大於還是小於？記住開口向住大嘅數。":"046.mp3","5 和 2，應該用大於還是小於？記住開口向住大嘅數。":"047.mp3","5 和 3，應該用大於還是小於？記住開口向住大嘅數。":"048.mp3","5 和 4，應該用大於還是小於？記住開口向住大嘅數。":"049.mp3","5 和 6，應該用大於還是小於？記住開口向住大嘅數。":"050.mp3","5 和 7，應該用大於還是小於？記住開口向住大嘅數。":"051.mp3","5 和 8，應該用大於還是小於？記住開口向住大嘅數。":"052.mp3","5 和 9，應該用大於還是小於？記住開口向住大嘅數。":"053.mp3","6 和 10，應該用大於還是小於？記住開口向住大嘅數。":"054.mp3","6 和 1，應該用大於還是小於？記住開口向住大嘅數。":"055.mp3","6 和 2，應該用大於還是小於？記住開口向住大嘅數。":"056.mp3","6 和 3，應該用大於還是小於？記住開口向住大嘅數。":"057.mp3","6 和 4，應該用大於還是小於？記住開口向住大嘅數。":"058.mp3","6 和 5，應該用大於還是小於？記住開口向住大嘅數。":"059.mp3","6 和 7，應該用大於還是小於？記住開口向住大嘅數。":"060.mp3","6 和 8，應該用大於還是小於？記住開口向住大嘅數。":"061.mp3","6 和 9，應該用大於還是小於？記住開口向住大嘅數。":"062.mp3","7 和 10，應該用大於還是小於？記住開口向住大嘅數。":"063.mp3","7 和 1，應該用大於還是小於？記住開口向住大嘅數。":"064.mp3","7 和 2，應該用大於還是小於？記住開口向住大嘅數。":"065.mp3","7 和 3，應該用大於還是小於？記住開口向住大嘅數。":"066.mp3","7 和 4，應該用大於還是小於？記住開口向住大嘅數。":"067.mp3","7 和 5，應該用大於還是小於？記住開口向住大嘅數。":"068.mp3","7 和 6，應該用大於還是小於？記住開口向住大嘅數。":"069.mp3","7 和 8，應該用大於還是小於？記住開口向住大嘅數。":"070.mp3","7 和 9，應該用大於還是小於？記住開口向住大嘅數。":"071.mp3","8 和 10，應該用大於還是小於？記住開口向住大嘅數。":"072.mp3","8 和 1，應該用大於還是小於？記住開口向住大嘅數。":"073.mp3","8 和 2，應該用大於還是小於？記住開口向住大嘅數。":"074.mp3","8 和 3，應該用大於還是小於？記住開口向住大嘅數。":"075.mp3","8 和 4，應該用大於還是小於？記住開口向住大嘅數。":"076.mp3","8 和 5，應該用大於還是小於？記住開口向住大嘅數。":"077.mp3","8 和 6，應該用大於還是小於？記住開口向住大嘅數。":"078.mp3","8 和 7，應該用大於還是小於？記住開口向住大嘅數。":"079.mp3","8 和 9，應該用大於還是小於？記住開口向住大嘅數。":"080.mp3","9 和 10，應該用大於還是小於？記住開口向住大嘅數。":"081.mp3","9 和 1，應該用大於還是小於？記住開口向住大嘅數。":"082.mp3","9 和 2，應該用大於還是小於？記住開口向住大嘅數。":"083.mp3","9 和 3，應該用大於還是小於？記住開口向住大嘅數。":"084.mp3","9 和 4，應該用大於還是小於？記住開口向住大嘅數。":"085.mp3","9 和 5，應該用大於還是小於？記住開口向住大嘅數。":"086.mp3","9 和 6，應該用大於還是小於？記住開口向住大嘅數。":"087.mp3","9 和 7，應該用大於還是小於？記住開口向住大嘅數。":"088.mp3","9 和 8，應該用大於還是小於？記住開口向住大嘅數。":"089.mp3","小於":"090.mp3","大於":"091.mp3","一起來玩數學":"092.mp3","三組兔仔，哪一組最多？":"093.mp3","三組兔仔，哪一組最少？":"094.mp3","三組小貓，哪一組最多？":"095.mp3","三組小貓，哪一組最少？":"096.mp3","三組小魚，哪一組最多？":"097.mp3","三組小魚，哪一組最少？":"098.mp3","三組小鳥，哪一組最多？":"099.mp3","三組小鳥，哪一組最少？":"100.mp3","三組心心，哪一組最多？":"101.mp3","三組心心，哪一組最少？":"102.mp3","三組星星，哪一組最多？":"103.mp3","三組星星，哪一組最少？":"104.mp3","三組檸檬，哪一組最多？":"105.mp3","三組檸檬，哪一組最少？":"106.mp3","三組氣球，哪一組最多？":"107.mp3","三組氣球，哪一組最少？":"108.mp3","三組花朵，哪一組最多？":"109.mp3","三組花朵，哪一組最少？":"110.mp3","三組草莓，哪一組最多？":"111.mp3","三組草莓，哪一組最少？":"112.mp3","三組蘋果，哪一組最多？":"113.mp3","三組蘋果，哪一組最少？":"114.mp3","三組蝴蝶，哪一組最多？":"115.mp3","三組蝴蝶，哪一組最少？":"116.mp3","倒數 10 到 1":"117.mp3","倒數迷宮，由十按到一，不要走回頭路。":"118.mp3","倒數，空格應填甚麼？":"119.mp3","哪一棟最矮？要比同一條底線。":"120.mp3","哪一棟最高？要比同一條底線。":"121.mp3","哪隻小貓離城堡最近？":"122.mp3","哪隻小貓離城堡最遠？":"123.mp3","圈出和左邊一樣的圖形。":"124.mp3","太棒了，你拿到星星了":"125.mp3","找一找，哪一個和別的顏色不同？點佢。":"126.mp3","數一數左邊有幾個，再圈出一樣多的火柴。":"127.mp3","數一數，有幾多兔仔？一個一個慢慢數。":"128.mp3","數一數，有幾多小貓？一個一個慢慢數。":"129.mp3","數一數，有幾多小魚？一個一個慢慢數。":"130.mp3","數一數，有幾多小鳥？一個一個慢慢數。":"131.mp3","數一數，有幾多心心？一個一個慢慢數。":"132.mp3","數一數，有幾多星星？一個一個慢慢數。":"133.mp3","數一數，有幾多檸檬？一個一個慢慢數。":"134.mp3","數一數，有幾多氣球？一個一個慢慢數。":"135.mp3","數一數，有幾多花朵？一個一個慢慢數。":"136.mp3","數一數，有幾多草莓？一個一個慢慢數。":"137.mp3","數一數，有幾多蘋果？一個一個慢慢數。":"138.mp3","數一數，有幾多蝴蝶？一個一個慢慢數。":"139.mp3","數字列車，2 的前面一個數是甚麼？":"140.mp3","數字列車，2 的後面一個數是甚麼？":"141.mp3","數字列車，3 的前面一個數是甚麼？":"142.mp3","數字列車，3 的後面一個數是甚麼？":"143.mp3","數字列車，4 的前面一個數是甚麼？":"144.mp3","數字列車，4 的後面一個數是甚麼？":"145.mp3","數字列車，5 的前面一個數是甚麼？":"146.mp3","數字列車，5 的後面一個數是甚麼？":"147.mp3","數字列車，6 的前面一個數是甚麼？":"148.mp3","數字列車，6 的後面一個數是甚麼？":"149.mp3","數字列車，7 的前面一個數是甚麼？":"150.mp3","數字列車，7 的後面一個數是甚麼？":"151.mp3","數字列車，8 的前面一個數是甚麼？":"152.mp3","數字列車，8 的後面一個數是甚麼？":"153.mp3","數字列車，9 的前面一個數是甚麼？":"154.mp3","數字列車，9 的後面一個數是甚麼？":"155.mp3","有幾個三角形？":"156.mp3","有幾個圓形？":"157.mp3","正確答案是0":"158.mp3","正確答案是1":"159.mp3","正確答案是10":"160.mp3","正確答案是11":"161.mp3","正確答案是12":"162.mp3","正確答案是13":"163.mp3","正確答案是14":"164.mp3","正確答案是15":"165.mp3","正確答案是16":"166.mp3","正確答案是17":"167.mp3","正確答案是18":"168.mp3","正確答案是19":"169.mp3","正確答案是2":"170.mp3","正確答案是20":"171.mp3","正確答案是3":"172.mp3","正確答案是4":"173.mp3","正確答案是5":"174.mp3","正確答案是6":"175.mp3","正確答案是7":"176.mp3","正確答案是8":"177.mp3","正確答案是9":"178.mp3","正確答案是小於":"179.mp3","正確答案是大於":"180.mp3","正確答案是倒數 10 到 1":"181.mp3","正確答案是紅色圓形":"182.mp3","正確答案是綠色三角形":"183.mp3","正確答案是藍色方形":"184.mp3","正確答案是順數 1 到 10":"185.mp3","正確答案是顏色不同的那個":"186.mp3","正確答案是黃色星星":"187.mp3","正確答案是黃色框入面嘅物件":"188.mp3","比 2 多一 的數是甚麼？":"189.mp3","比 2 少一 的數是甚麼？":"190.mp3","比 3 多一 的數是甚麼？":"191.mp3","比 3 少一 的數是甚麼？":"192.mp3","比 4 多一 的數是甚麼？":"193.mp3","比 4 少一 的數是甚麼？":"194.mp3","比 5 多一 的數是甚麼？":"195.mp3","比 5 少一 的數是甚麼？":"196.mp3","比 6 多一 的數是甚麼？":"197.mp3","比 6 少一 的數是甚麼？":"198.mp3","比 7 多一 的數是甚麼？":"199.mp3","比 7 少一 的數是甚麼？":"200.mp3","比 8 多一 的數是甚麼？":"201.mp3","比 8 少一 的數是甚麼？":"202.mp3","看規律，下一個圖案是甚麼？":"203.mp3","看規律，空格應填甚麼？每次加 1。":"204.mp3","看規律，空格應填甚麼？每次加 2。":"205.mp3","睇下黃色框喺邊度，點一下框入面嘅嘢。":"206.mp3","答對了，好厲害！":"207.mp3","紅色圓形":"208.mp3","綠色三角形":"209.mp3","藍色方形":"210.mp3","超級厲害，你是數學小天才！":"211.mp3","連續答對10題":"212.mp3","連續答對11題":"213.mp3","連續答對12題":"214.mp3","連續答對13題":"215.mp3","連續答對14題":"216.mp3","連續答對15題":"217.mp3","連續答對16題":"218.mp3","連續答對17題":"219.mp3","連續答對18題":"220.mp3","連續答對19題":"221.mp3","連續答對1題":"222.mp3","連續答對20題":"223.mp3","連續答對2題":"224.mp3","連續答對3題":"225.mp3","連續答對4題":"226.mp3","連續答對5題":"227.mp3","連續答對6題":"228.mp3","連續答對7題":"229.mp3","連續答對8題":"230.mp3","連續答對9題":"231.mp3","連續答對，太厲害了！":"232.mp3","順數 1 到 10":"233.mp3","順數迷宮，由一起按到十，不要走回頭路。":"234.mp3","順數，空格應填甚麼？":"235.mp3","顏色不同的那個":"236.mp3","黃色星星":"237.mp3","黃色框入面嘅物件":"238.mp3","正確答案是圓形":"239.mp3","正確答案是方形":"240.mp3","正確答案是三角形":"241.mp3","嘩！有驚喜禮物！快啲點開佢！":"242.mp3","恭喜！你解鎖咗新獎盃！":"243.mp3","你的收藏又多咗一件！":"244.mp3","你收到小貓！":"245.mp3","你收到兔仔！":"246.mp3","你收到小魚！":"247.mp3","你收到小鳥！":"248.mp3","你收到蝴蝶！":"249.mp3","你收到心心！":"250.mp3","你收到星星！":"251.mp3","你收到花朵！":"252.mp3","你收到氣球！":"253.mp3","你收到草莓！":"254.mp3","你收到檸檬！":"255.mp3","你收到蘋果！":"256.mp3","繼續努力，仲有驚喜等住你！":"257.mp3","再試一次，加油！":"258.mp3","哇！恭喜！你解鎖咗新獎盃！":"259.mp3","哇！連續答對！你真係好叻呀！":"260.mp3","嘩！你攞到星星啦！太棒啦！":"261.mp3","嘩！有驚喜！快啲點開禮物呀！":"262.mp3","嘩！答對咗！好叻呀！":"263.mp3","嘩！超級棒！你係數學小天才呀！":"264.mp3","時間到！下次快啲！":"265.mp3","正確答案是這個":"266.mp3","Count from the left. Which number is it?":"267.mp3","Count the blocks. How many are there?":"268.mp3","Count the pictures. How many are there?":"269.mp3","Count the pictures. Which group has the same number?":"270.mp3","Fantastic! You are a maths superstar!":"271.mp3","Find the one that is a different colour. Touch it.":"272.mp3","Find the shape that is the same as this one.":"273.mp3","Good try! Have another go!":"274.mp3","How many altogether? Count them all.":"275.mp3","Let us play maths!":"276.mp3","Look at the pattern. What comes next?":"277.mp3","Look at the pattern. Which number is missing?":"278.mp3","Look at the yellow box. Tap what is inside it.":"279.mp3","The answer is 1 to 10":"280.mp3","The answer is 10 to 1":"281.mp3","The answer is circle":"282.mp3","The answer is square":"283.mp3","The answer is the object in the yellow box":"284.mp3","The answer is the one with a different colour":"285.mp3","The answer is this one":"286.mp3","The answer is triangle":"287.mp3","Time's up! Try to be quicker!":"288.mp3","Welcome to KeeGee Math Land!":"289.mp3","Which one is different from the others?":"290.mp3","Which sign is correct? The big mouth faces the bigger number.":"291.mp3","Wow! Congratulations! A new trophy!":"292.mp3","Wow! Correct! Well done!":"293.mp3","Wow, a streak! You are amazing!":"294.mp3","Wow, a surprise! Tap to open it!":"295.mp3","Yay! You earned a star! Great job!":"296.mp3","You got 1 in a row!":"297.mp3","You got 10 in a row!":"298.mp3","You got 2 in a row!":"299.mp3","You got 3 in a row!":"300.mp3","You got 4 in a row!":"301.mp3","You got 5 in a row!":"302.mp3","You got 6 in a row!":"303.mp3","You got 7 in a row!":"304.mp3","You got 8 in a row!":"305.mp3","You got 9 in a row!":"306.mp3","You got apple!":"307.mp3","You got balloon!":"308.mp3","You got bird!":"309.mp3","You got bunny!":"310.mp3","You got butterfly!":"311.mp3","You got fish!":"312.mp3","You got flower!":"313.mp3","You got heart!":"314.mp3","You got kitten!":"315.mp3","You got lemon!":"316.mp3","You got star!":"317.mp3","You got strawberry!":"318.mp3","數一數，有幾多塊積木？一塊一塊慢慢數。":"319.mp3","由左邊數，黃色框係第幾個？":"320.mp3","找一找，邊一個和其他唔同類？":"321.mp3","哪一條最短？":"322.mp3","哪一條最長？":"323.mp3","兩堆合起來，一共有幾個？數一數。":"324.mp3","Which number comes just after?":"325.mp3","Which number comes just before?":"326.mp3","Counting up. Which number is missing?":"327.mp3","Counting down. Which number is missing?":"328.mp3","Which group has the most?":"329.mp3","Which group has the fewest?":"330.mp3","What number is one more?":"331.mp3","What number is one less?":"332.mp3","Which one is the tallest?":"333.mp3","Which one is the shortest?":"334.mp3","Which cat is nearest?":"335.mp3","Which cat is farthest?":"336.mp3","How many triangles?":"337.mp3","How many circles?":"338.mp3","Start at one. Tap the numbers in order up to ten.":"339.mp3","Start at ten. Tap the numbers in order down to one.":"340.mp3","Which one is the longest?":"341.mp3","圈出和左邊一樣嘅圖案。":"342.mp3","邊個大啲？":"343.mp3","圈出同一種顏色。":"344.mp3"};
 let curAudio=null;
 function stopVoice(){if(curAudio){try{curAudio.pause();curAudio.currentTime=0;}catch(e){}curAudio=null;}
   if('speechSynthesis'in window){try{speechSynthesis.cancel();}catch(e){}}}
@@ -569,10 +658,10 @@ GEN.most=()=>{let askMost=Math.random()<.5,kinds=pick(ICONS),counts=shuffle([ran
   let target=askMost?Math.max(...counts):Math.min(...counts),ans=counts.indexOf(target);
   let cols=['#e5484d','#3a86d4','#3fa64a'],g='';
   counts.forEach((cnt,i)=>{let x=20+i*190;g+=`<rect x="${x}" y="30" width="175" height="180" rx="14" fill="#fbfcfe" stroke="#dfe6ee" stroke-width="2"/>`;
-    g+=gridIcons(cnt,kinds,cols[i],3,x+30,60,50,48,15);g+=markSvg(i,x+87,196,30);});
+    g+=gridIcons(cnt,kinds,cols[i],3,x+30,60,50,48,15);});
   return {tag:'比多少',title:`哪一組${askMost?'最多':'最少'}？`,speak:`三組${NAME[kinds]}，哪一組${askMost?'最多':'最少'}？`,
     en:{tag:'Most / Fewest',title:askMost?'Which group has the most?':'Which group has the fewest?',speak:askMost?'Which group has the most?':'Which group has the fewest?',tip:'Line them up and compare.'},
-    scene:svg(600,230,g),options:counts.map((c,i)=>markOpt(i)),answer:ans,tip:'一對一排好隊，多出嚟嗰組就係多。'};};
+    scene:svg(600,215,g),options:counts.map((c,i)=>iconOpt(kinds,cols[i])),answer:ans,tip:'一對一排好隊，多出嚟嗰組就係多。'};};
 // 6. more1 / less1
 GEN.more1=()=>{let n=rand(2,8),more=Math.random()<.5,ans=more?n+1:n-1,opts=numOpts(ans,1,10,4);
   return {tag:'多1少1',title:`比 ${n} ${more?'多 1':'少 1'} 的數是甚麼？`,speak:`比 ${n} ${more?'多一':'少一'} 的數是甚麼？`,
@@ -581,19 +670,20 @@ GEN.more1=()=>{let n=rand(2,8),more=Math.random()<.5,ans=more?n+1:n-1,opts=numOp
     options:opts.map(v=>({t:String(v),v})),answer:opts.indexOf(ans),tip:more?'多 1 就是加 1。':'少 1 就是減 1。'};};
 // 7. height
 GEN.height=()=>{let askTall=Math.random()<.5,hs=shuffle([40,70,100,130]),ans=askTall?hs.indexOf(Math.max(...hs)):hs.indexOf(Math.min(...hs));
-  let base=170,g='';hs.forEach((h,i)=>{let x=40+i*105;
-    g+=`<rect x="${x}" y="${base-h}" width="66" height="${h}" rx="8" fill="${['#e5484d','#3a86d4','#3fa64a','#f2b32e'][i]}"/><rect x="${x-6}" y="${base}" width="78" height="7" rx="3" fill="#c9d2dc"/>`+markSvg(i,x+33,base+28,26);});
+  let base=170,g='',cols=['#e5484d','#3a86d4','#3fa64a','#f2b32e'];hs.forEach((h,i)=>{let x=40+i*105;
+    g+=`<rect x="${x}" y="${base-h}" width="66" height="${h}" rx="8" fill="${cols[i]}"/><rect x="${x-6}" y="${base}" width="78" height="7" rx="3" fill="#c9d2dc"/>`;});
   return {tag:'比高矮',title:`圈出${askTall?'最高':'最矮'}的建築物。`,speak:`哪一棟${askTall?'最高':'最矮'}？要比同一條底線。`,
     en:{tag:'Tall / Short',title:askTall?'Which building is the tallest?':'Which building is the shortest?',speak:askTall?'Which one is the tallest?':'Which one is the shortest?',tip:'They all stand on the same ground.'},
-    scene:svg(470,210,g),options:hs.map((h,i)=>markOpt(i)),answer:ans,tip:'比高矮要站在同一條底線比較。'};};
+    scene:svg(470,185,g),options:hs.map((h,i)=>barOpt(h,cols[i])),answer:ans,tip:'比高矮要站在同一條底線比較。'};};
 // 8. near / far
 GEN.nearfar=()=>{let askNear=Math.random()<.5,pos=shuffle([60,180,520,650]),tx=360,ans;
   let dist=pos.map(p=>Math.abs(p-tx));ans=askNear?dist.indexOf(Math.min(...dist)):dist.indexOf(Math.max(...dist));
+  let cols=['#e5484d','#3a86d4','#3fa64a','#f2b32e'];
   let g=`<line x1="20" y1="170" x2="700" y2="170" stroke="#d7dee8" stroke-width="4"/><rect x="${tx-38}" y="90" width="76" height="80" rx="8" fill="${C.brown}"/><path d="M${tx-46} 90 L${tx} 55 L${tx+46} 90Z" fill="#8a4f2a"/>`;
-  pos.forEach((p,i)=>{g+=icon('cat',p,145,18,['#e5484d','#3a86d4','#3fa64a','#f2b32e'][i])+markSvg(i,p,200,26);});
+  pos.forEach((p,i)=>{g+=icon('cat',p,145,18,cols[i]);});
   return {tag:'遠和近',title:`哪隻小貓離城堡${askNear?'最近':'最遠'}？`,speak:`哪隻小貓離城堡${askNear?'最近':'最遠'}？`,
     en:{tag:'Near / Far',title:askNear?'Which cat is nearest the castle?':'Which cat is farthest from the castle?',speak:askNear?'Which cat is nearest?':'Which cat is farthest?',tip:'Near is a short distance.'},
-    scene:svg(720,220,g),options:pos.map((p,i)=>markOpt(i)),answer:ans,tip:'近就是距離短，遠就是距離長。'};};
+    scene:svg(720,185,g),options:pos.map((p,i)=>iconOpt('cat',cols[i])),answer:ans,tip:'近就是距離短，遠就是距離長。'};};
 // 9. up / down
 GEN.updown=()=>{
   let targetZone=Math.random()<.5?0:1;
@@ -615,7 +705,7 @@ GEN.shape=()=>{let shapes=['circle','square','triangle'],target=pick(shapes);
   let name={circle:'圓形',square:'方形',triangle:'三角形'};
   let nameEn={circle:'circle',square:'square',triangle:'triangle'};
   let order=shuffle(shapes),ans=order.indexOf(target);
-  let g=`<circle cx="70" cy="100" r="46" fill="none" stroke="#f2b32e" stroke-width="3" stroke-dasharray="7 6"/>`+draw(target,70,100,C.orange);
+  let g=`<circle cx="70" cy="100" r="46" fill="none" stroke="#f2b32e" stroke-width="3" stroke-dasharray="7 6"/>`+draw(target,70,100,C.blue);
   order.forEach((s,i)=>{let x=190+i*120;g+=`<rect x="${x-50}" y="50" width="100" height="100" rx="12" fill="#fbfcfe" stroke="#dfe6ee" stroke-width="2"/>`+draw(s,x,100,C.blue);});
   return {tag:'圖形辨識',title:'圈出和左邊一樣的圖形。',speak:'圈出和左邊一樣的圖形。',
     en:{tag:'Same shape',title:'Find the shape that is the same',speak:'Find the shape that is the same as this one.',tip:'Compare the shapes carefully.'},
@@ -637,19 +727,18 @@ GEN.patternNum=()=>{let start=rand(1,4),d=pick([1,2]),seq=[start,start+d,start+2
 GEN.patternShape=()=>{let pair=shuffle(ICONS).slice(0,2),seq=[pair[0],pair[1],pair[0],pair[1],'?'],ansIdx=0;
   let choices=shuffle([pair[0],pair[1],pick(ICONS.filter(x=>!pair.includes(x)))]),ans=choices.indexOf(pair[0]);
   let g='';for(let i=0;i<5;i++){let x=55+i*100;if(i===4){g+=`<rect x="${x-40}" y="60" width="80" height="80" rx="12" fill="#fff7e6" stroke="#e08a2b" stroke-width="2"/><text x="${x}" y="115" text-anchor="middle" font-size="40" fill="#c9d2dc">?</text>`;}else g+=icon(seq[i],x,100,24,C.purple);}
-  choices.forEach((k,i)=>{g+=icon(k,150+i*130,220,20,C.purple)+markSvg(i,150+i*130,262,26);});
+  choices.forEach((k,i)=>{g+=icon(k,150+i*130,210,22,C.purple);});
   return {tag:'圖案規律',title:'下一個圖案是甚麼？',speak:'看規律，下一個圖案是甚麼？',
     en:{tag:'Pattern',title:'What comes next?',speak:'Look at the pattern. What comes next?',tip:'Find the repeating order.'},
-    scene:svg(560,280,g),options:choices.map((k,i)=>markOpt(i)),answer:ans,tip:'找出重複的次序。'};};
+    scene:svg(560,250,g),options:choices.map(k=>iconOpt(k,C.purple)),answer:ans,tip:'找出重複的次序。'};};
 // 14. matchsticks / equal count
 GEN.match=()=>{let n=rand(3,8),opts=numOpts(n,2,10,3),k=pick(ICONS);
   let g=gridIcons(n,k,C.pink,4,40,70,45,45,13)+`<text x="190" y="120" text-anchor="middle" font-size="60" font-weight="800" fill="#f2b32e">=</text>`;
   opts.forEach((cnt,i)=>{let x=250+i*150;g+=`<rect x="${x-60}" y="50" width="120" height="150" rx="12" fill="#fbfcfe" stroke="#dfe6ee" stroke-width="2"/>`;
-    for(let j=0;j<cnt;j++)g+=`<line x1="${x-38}" y1="${85+j*18}" x2="${x+38}" y2="${85+j*18}" stroke="${C.brown}" stroke-width="5" stroke-linecap="round"/>`;
-    g+=markSvg(i,x,220,26);});
+    for(let j=0;j<cnt;j++)g+=`<line x1="${x-38}" y1="${85+j*18}" x2="${x+38}" y2="${85+j*18}" stroke="${C.brown}" stroke-width="5" stroke-linecap="round"/>`;});
   return {tag:'等量配對',title:'圈出和左邊一樣多的火柴。',speak:'數一數左邊有幾個，再圈出一樣多的火柴。',
     en:{tag:'Same amount',title:'Which group has the same number?',speak:'Count the pictures. Which group has the same number?',tip:'Count the pictures, then count the sticks.'},
-    scene:svg(700,240,g),options:opts.map((cnt,i)=>markOpt(i)),answer:opts.indexOf(n),tip:'先數清楚左邊，再數火柴。'};};
+    scene:svg(700,215,g),options:opts.map(cnt=>stickOpt(cnt)),answer:opts.indexOf(n),tip:'先數清楚左邊，再數火柴。'};};
 // 15. count shapes (mixed circles & triangles)
 GEN.countShapes=()=>{let nc=rand(2,5),nt=rand(2,5),askCircle=Math.random()<.5,ans=askCircle?nc:nt;
   let g='';for(let i=0;i<nc;i++)g+=`<circle cx="${60+i*80}" cy="80" r="24" fill="${C.red}"/>`;
@@ -665,18 +754,16 @@ function buildMaze(asc){let start=[0,0],path=[start],seen=new Set(['0,0']);
       if(r>=0&&r<5&&c>=0&&c<5&&!seen.has(k)){seen.add(k);path.push([r,c]);moved=true;break;}}
     if(!moved)break;}
   if(path.length<10)return buildMaze(asc);
+  // only the hidden path carries numbers — no duplicate numbers can distract a child
   let grid=Array.from({length:5},()=>Array(5).fill(null));
   path.forEach((p,i)=>grid[p[0]][p[1]]=asc?i+1:10-i);
-  let next=path.map((p,i)=>{let v=asc?i+1:10-i,nv=asc?v+1:v-1;return {p,nv};});
-  let banned={};next.forEach(({p,nv})=>{[[1,0],[-1,0],[0,1],[0,-1]].forEach(([dr,dc])=>{let k=(p[0]+dr)+','+(p[1]+dc);(banned[k]=banned[k]||new Set()).add(nv);});});
-  for(let r=0;r<5;r++)for(let c=0;c<5;c++){if(grid[r][c]!==null)continue;let ban=banned[r+','+c]||new Set(),cand=[1,2,3,4,5,6,7,8,9].filter(v=>!ban.has(v));grid[r][c]=cand.length?pick(cand):rand(1,9);}
   return {grid,path,asc};
 }
 GEN.mazeUp=()=>mazeQ(true);GEN.mazeDown=()=>mazeQ(false);
 function mazeQ(asc){let m=buildMaze(asc),cell=58,g='';
   for(let r=0;r<5;r++)for(let c=0;c<5;c++){let x=c*cell, y=10+r*cell, isS=r===0&&c===0;
     g+=`<rect class="cell" data-r="${r}" data-c="${c}" x="${x+2}" y="${y+2}" width="${cell-4}" height="${cell-4}" rx="9" fill="${isS?'#ffe9e7':'#f7f9fc'}" stroke="#d7dee8" stroke-width="2"/>`;
-    g+=`<text class="cl" data-r="${r}" data-c="${c}" x="${x+cell/2}" y="${y+cell*.68}" text-anchor="middle" font-size="26" font-weight="800" fill="#1f2733" pointer-events="none">${m.grid[r][c]}</text>`;}
+    let v=m.grid[r][c];g+=`<text class="cl" data-r="${r}" data-c="${c}" x="${x+cell/2}" y="${y+cell*.68}" text-anchor="middle" font-size="26" font-weight="800" fill="${v===null?'#d7dee8':'#1f2733'}" pointer-events="none">${v===null?'·':v}</text>`;}
   g+=`<text x="${cell/2}" y="8" text-anchor="middle" font-size="12" fill="${C.red}">起</text>`;
   return {tag:asc?'順數迷宮':'倒數迷宮',title:asc?'順數迷宮：由 1 按到 10。':'倒數迷宮：由 10 按到 1。',
     speak:asc?'順數迷宮，由一起按到十，不要走回頭路。':'倒數迷宮，由十按到一，不要走回頭路。',
@@ -706,22 +793,55 @@ GEN.ordinal=()=>{let n=5,pos=rand(1,n),k=pick(ICONS),kinds=shuffle(ICONS).slice(
 // 20. classify — find the odd one out (3 same category, 1 different)
 GEN.classify=()=>{let groups=[['apple','lemon','strawberry','fish'],['cat','rabbit','bird','apple'],['butterfly','bird','fish','star']];
   let g4=pick(groups),odd=g4[3],ans=rand(0,3),items=shuffle([g4[0],g4[1],g4[2],odd]);ans=items.indexOf(odd);
-  let g='';items.forEach((k,i)=>{let x=70+i*120;g+=`<rect x="${x-46}" y="50" width="92" height="112" rx="14" fill="#fbfcfe" stroke="#dfe6ee" stroke-width="2"/>`+icon(k,x,100,27,pick([C.red,C.green,C.blue,C.purple]))+markSvg(i,x,180,26);});
+  let g='',cols=[C.red,C.green,C.blue,C.purple];items.forEach((k,i)=>{let x=70+i*120;g+=`<rect x="${x-46}" y="50" width="92" height="112" rx="14" fill="#fbfcfe" stroke="#dfe6ee" stroke-width="2"/>`+icon(k,x,100,27,cols[i]);});
   return {tag:'找不同類',title:'邊一個和其他不同類？',speak:'找一找，邊一個和其他唔同類？',
     en:{tag:'Odd one out',title:'Which one is different from the others?',speak:'Which one is different from the others?',tip:'Three belong together, one does not.'},
-    scene:svg(560,210,g),options:items.map((k,i)=>markOpt(i)),answer:ans,tip:'三個係同一類，找出唔同嗰個。'};};
+    scene:svg(560,180,g),options:items.map((k,i)=>iconOpt(k,cols[i])),answer:ans,tip:'三個係同一類，找出唔同嗰個。'};};
 // 21. long / short — compare lengths of bars
 GEN.longshort=()=>{let askLong=Math.random()<.5,ls=shuffle([60,100,140,180]),ans=askLong?ls.indexOf(Math.max(...ls)):ls.indexOf(Math.min(...ls));
-  let y=30,g='';ls.forEach((w,i)=>{let yy=y+i*48;g+=`<text x="18" y="${yy+22}" font-size="16" fill="#7a8699">${i+1}</text><rect x="40" y="${yy}" width="${w}" height="30" rx="8" fill="${['#e5484d','#3a86d4','#3fa64a','#f2b32e'][i]}"/>`+markSvg(i,40+w+22,yy+15,24);});
+  let y=30,g='',cols=['#e5484d','#3a86d4','#3fa64a','#f2b32e'];ls.forEach((w,i)=>{let yy=y+i*48;g+=`<rect x="40" y="${yy}" width="${w}" height="30" rx="8" fill="${cols[i]}"/>`;});
   return {tag:'比長短',title:`圈出${askLong?'最長':'最短'}的一條。`,speak:`哪一條${askLong?'最長':'最短'}？`,
     en:{tag:'Long / Short',title:askLong?'Which line is the longest?':'Which line is the shortest?',speak:askLong?'Which one is the longest?':'Which one is the shortest?',tip:'All lines start at the same place.'},
-    scene:svg(300,225,g),options:ls.map((w,i)=>markOpt(i)),answer:ans,tip:'由同一個起點比較長短。'};};
+    scene:svg(240,215,g),options:ls.map((w,i)=>barOpt(w,cols[i])),answer:ans,tip:'由同一個起點比較長短。'};};
 // 22. addition — combine two groups (simple sums within 10)
 GEN.addition=()=>{let a=rand(1,5),b=rand(1,5),n=a+b,k=pick(ICONS),opts=numOpts(n,2,11,4);
   let g=gridIcons(a,k,C.red,3,40,70,46,46,15)+`<text x="250" y="130" text-anchor="middle" font-size="64" font-weight="800" fill="#f2b32e">+</text>`+gridIcons(b,k,C.blue,3,310,70,46,46,15);
   return {tag:'加法',title:'合起來一共有幾個？',speak:'兩堆合起來，一共有幾個？數一數。',
     en:{tag:'Add',title:'How many altogether?',speak:'How many altogether? Count them all.',tip:'Put the two groups together and count.'},
     scene:svg(470,200,g),options:opts.map(v=>({t:String(v),v})),answer:opts.indexOf(n),tip:'兩堆加在一起，從頭數到尾。'};};
+
+/* ===== N-K1 beginner generators — big pictures, direct visual options ===== */
+function circleOpt(r,col){return {t:'',v:r,svg:`<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="${r/2}" fill="${col}"/></svg>`,label:''};}
+GEN.babyCount=()=>{let k=pick(ICONS),col=pick([C.red,C.blue,C.green,C.orange,C.purple]),n=rand(1,5),opts=numOpts(n,1,5,4);
+  return {tag:'啟蒙·數一數',title:`數一數，有幾多${NAME[k]}？`,speak:`數一數，有幾多${NAME[k]}？一個一個慢慢數。`,
+    en:{tag:'Baby count',title:'Count the pictures. How many?',speak:'Count the pictures. How many are there?',tip:'Touch and count one by one.'},
+    scene:svg(560,240,gridIcons(n,k,col,5,80,80,90,90,42)),options:opts.map(v=>({t:String(v),v})),answer:opts.indexOf(n),tip:'一個一個慢慢數。'};};
+GEN.babySame=()=>{let k=pick(ICONS),choices=shuffle([k,...shuffle(ICONS.filter(x=>x!==k)).slice(0,2)]),ans=choices.indexOf(k);
+  let g=`<circle cx="90" cy="120" r="64" fill="none" stroke="#f2b32e" stroke-width="4" stroke-dasharray="9 7"/>`+icon(k,90,120,48,C.orange);
+  return {tag:'啟蒙·找一樣',title:'圈出和左邊一樣嘅圖案。',speak:'圈出和左邊一樣嘅圖案。',
+    en:{tag:'Baby match',title:'Find the same picture',speak:'Find the picture that is the same.',tip:'Look carefully at each picture.'},
+    scene:svg(200,240,g),options:choices.map(x=>iconOpt(x,C.blue)),answer:ans,tip:'逐一比對，選一樣嘅。'};};
+GEN.babyBig=()=>{let bigFirst=Math.random()<.5,rs=bigFirst?[70,34]:[34,70],cols=[C.orange,C.blue],ans=bigFirst?0:1;
+  let g=`<circle cx="120" cy="120" r="${rs[0]/2}" fill="${cols[0]}"/><circle cx="340" cy="120" r="${rs[1]/2}" fill="${cols[1]}"/>`;
+  return {tag:'啟蒙·比大小',title:'邊個大啲？',speak:'邊個大啲？',
+    en:{tag:'Baby big',title:'Which one is bigger?',speak:'Which one is bigger?',tip:'Look at the size.'},
+    scene:svg(460,240,g),options:rs.map((r,i)=>circleOpt(r,cols[i])),answer:ans,tip:'大啲嗰個圓圈面積較大。'};};
+GEN.babyColor=()=>{let cols=shuffle([C.red,C.blue,C.green,C.orange,C.purple,C.pink]).slice(0,3),ans=rand(0,2);
+  let g=`<circle cx="90" cy="120" r="56" fill="none" stroke="#f2b32e" stroke-width="4" stroke-dasharray="9 7"/><circle cx="90" cy="120" r="42" fill="${cols[ans]}"/>`;
+  return {tag:'啟蒙·配顏色',title:'圈出同一種顏色。',speak:'圈出同一種顏色。',
+    en:{tag:'Baby colour',title:'Find the same colour',speak:'Find the same colour.',tip:'Match the colour.'},
+    scene:svg(200,240,g),options:cols.map(c=>({t:'',v:c,svg:`<svg viewBox="0 0 64 64"><circle cx="32" cy="32" r="26" fill="${c}"/></svg>`,label:''})),answer:ans,tip:'顏色一樣就啱。'};};
+GEN.babyTap=()=>{let target=rand(0,2),kinds=shuffle(ICONS).slice(0,3),cols=[C.red,C.blue,C.green],g='';
+  kinds.forEach((k,i)=>{let x=110+i*180,h= i===target?`<rect x="${x-52}" y="54" width="104" height="104" rx="16" fill="#fff2c9" stroke="#f2b32e" stroke-width="5" stroke-dasharray="10 7"/>`:'';
+    g+=h+`<g class="ztap" data-zone="${i}" style="cursor:pointer"><circle cx="${x}" cy="106" r="46" fill="transparent"/>${icon(k,x,106,36,cols[i])}</g>`;});
+  return {tag:'啟蒙·框入面',title:'點一下黃色框入面嘅嘢',speak:'睇下黃色框喺邊度，點一下框入面嘅嘢。',
+    en:{tag:'Baby tap',title:'Tap what is inside the yellow box',speak:'Look at the yellow box. Tap what is inside it.',tip:'Tap anything inside the yellow box.'},
+    scene:svg(560,220,g),mode:'tapzone',targetZone:target,options:[],tip:'黃色框框住嘅，就係要點嘅。'};};
+GEN.babyAdd=()=>{let a=rand(1,3),b=rand(1,3),n=a+b,k=pick(ICONS),opts=numOpts(n,2,6,4);
+  let g=gridIcons(a,k,C.red,3,40,70,80,80,38)+`<text x="250" y="135" text-anchor="middle" font-size="70" font-weight="800" fill="#f2b32e">+</text>`+gridIcons(b,k,C.blue,3,320,70,80,80,38);
+  return {tag:'啟蒙·加一加',title:'合起來一共有幾個？',speak:'兩堆合起來，一共有幾個？數一數。',
+    en:{tag:'Baby add',title:'How many altogether?',speak:'How many altogether? Count them all.',tip:'Put the two groups together and count.'},
+    scene:svg(560,230,g),options:opts.map(v=>({t:String(v),v})),answer:opts.indexOf(n),tip:'兩堆加在一起數。'};};
 
 /* =========================================================
    BOOK / LEVEL STRUCTURE
@@ -755,6 +875,15 @@ const BOOKS={
    {n:'綜合挑戰二',ne:'Mixed 2',d:'比較與圖形',de:'Compare and shapes',t:['most','height','nearfar','shape','compare']},
    {n:'競賽決戰',ne:'Final round',d:'全新題型',de:'All new question types',t:['cubes','ordinal','classify','longshort','addition']},
    {n:'決戰迷宮',ne:'Final maze',d:'順數＋倒數',de:'Count on and back',t:['mazeUp','mazeDown','finddiff','match','countShapes']},
+ ]},
+ N:{name:'N-K1 · 啟蒙樂園',en:'N-K1 · Baby Land',units:[
+   {n:'數一數',ne:'Counting',d:'1–5 大圖點數',de:'Count 1 to 5',t:['babyCount','babyCount']},
+   {n:'找一樣',ne:'Same picture',d:'圈出相同圖案',de:'Match the picture',t:['babySame','babySame']},
+   {n:'圖形',ne:'Shapes',d:'圓形方形三角形',de:'Circle square triangle',t:['shape','shape']},
+   {n:'比大小',ne:'Big and small',d:'大圓圈小圓圈',de:'Big and small',t:['babyBig','babyBig']},
+   {n:'配顏色',ne:'Colours',d:'圈出相同顏色',de:'Match the colour',t:['babyColor','babyColor']},
+   {n:'框入面',ne:'In the box',d:'點黃色框內',de:'Tap in the box',t:['babyTap','babyTap']},
+   {n:'加一加',ne:'Add up',d:'兩堆合起來',de:'Put together',t:['babyAdd','babyAdd']},
  ]}
 };
 const QPER=5;
@@ -798,10 +927,15 @@ function renderTrophy(){
     if(ic){ic.classList.add('off');ic.textContent='🏆';}}
   else{if(fill)fill.style.width='100%';if(txt)txt.textContent=t('trophyAll');if(ic)ic.classList.remove('off');}}
 function countCorrect(){totalCorrect++;try{localStorage.setItem('k2correct',String(totalCorrect));}catch(e){}renderTrophy();}
-function giftBoxSvg(){return `<svg viewBox="0 0 120 120"><rect x="22" y="48" width="76" height="60" rx="10" fill="#f5822a" stroke="#c25d13" stroke-width="3"/>
-  <rect x="16" y="36" width="88" height="20" rx="7" fill="#ff9147" stroke="#c25d13" stroke-width="3"/>
-  <path d="M60 36 C44 12 28 30 60 36 C92 30 76 12 60 36Z" fill="#f2b32e" stroke="#d99a1e" stroke-width="3"/>
-  <rect x="52" y="36" width="16" height="72" fill="#ffd23f"/><rect x="22" y="66" width="76" height="12" fill="#ffd23f"/></svg>`;}
+const GIFT_BOX_STYLES=[
+ ()=>`<svg viewBox="0 0 120 120"><rect x="22" y="48" width="76" height="60" rx="10" fill="#f5822a" stroke="#c25d13" stroke-width="3"/><rect x="16" y="36" width="88" height="20" rx="7" fill="#ff9147" stroke="#c25d13" stroke-width="3"/><path d="M60 36 C44 12 28 30 60 36 C92 30 76 12 60 36Z" fill="#f2b32e" stroke="#d99a1e" stroke-width="3"/><rect x="52" y="36" width="16" height="72" fill="#ffd23f"/><rect x="22" y="66" width="76" height="12" fill="#ffd23f"/></svg>`,
+ ()=>`<svg viewBox="0 0 120 120"><circle cx="60" cy="74" r="42" fill="#e46ba8" stroke="#b74378" stroke-width="3"/><path d="M18 66h84" stroke="#ffd6e7" stroke-width="8"/><path d="M60 66 C40 40 24 52 60 66 C96 52 80 40 60 66Z" fill="#fff1a8" stroke="#d99a1e" stroke-width="3"/><circle cx="60" cy="88" r="10" fill="#fff1a8"/></svg>`,
+ ()=>`<svg viewBox="0 0 120 120"><rect x="18" y="46" width="84" height="62" rx="16" fill="#17a2a2" stroke="#0c7373" stroke-width="3"/><path d="M18 62h84" stroke="#bff3f3" stroke-width="8"/><path d="M60 62 C44 26 26 48 60 62 C94 48 76 26 60 62Z" fill="#f2b32e" stroke="#d99a1e" stroke-width="3"/><circle cx="60" cy="84" r="9" fill="#fff1a8"/></svg>`,
+ ()=>`<svg viewBox="0 0 120 120"><rect x="28" y="38" width="64" height="72" rx="10" fill="#8b5cf6" stroke="#6c3bc4" stroke-width="3"/><path d="M28 58h64" stroke="#e9d5ff" stroke-width="8"/><path d="M60 58 C40 22 24 44 60 58 C96 44 80 22 60 58Z" fill="#ffd23f" stroke="#d99a1e" stroke-width="3"/><path d="M42 74l6 8-6 8M78 74l-6 8 6 8" stroke="#fff" stroke-width="4" fill="none" stroke-linecap="round"/></svg>`
+];
+let giftStyle=-1;
+function nextGiftStyle(){let n=rand(0,GIFT_BOX_STYLES.length-1);if(n===giftStyle)n=(n+1)%GIFT_BOX_STYLES.length;giftStyle=n;return n;}
+function giftBoxSvg(s){return GIFT_BOX_STYLES[s||0]();}
 let giftBusy=false,giftOpened=false;
 function maybeGift(){
   if(giftBusy)return false;
@@ -816,7 +950,8 @@ function triggerGift(){
   // let the correct-answer celebration play first, then reveal the gift
   setTimeout(()=>{
     ic.classList.remove('on');nm.classList.remove('on');box.classList.remove('open');box.style.display='block';
-    box.innerHTML=giftBoxSvg();cap.style.display='block';cap.textContent=t('giftCap');
+    let s=nextGiftStyle();box.className='giftbox gift-s'+s;box.innerHTML=giftBoxSvg(s);
+    cap.style.display='block';cap.textContent=t('giftCap');
     layer.classList.add('on');fbs('gift');sfx('super');
     layer.onclick=openGift;},1250);}
 function openGift(){
@@ -867,26 +1002,60 @@ function openBook(b){curBook=b;document.getElementById('lvTitle').textContent=bo
     g+=`<div class="lv" onclick="startLevel(${i})"><div class="num">${i+1}</div><h3>${unitName(u)}</h3><p>${unitDesc(u)}</p><div class="st">${stars}</div>${st?`<div class="done">${t('done')}</div>`:''}</div>`;});
   document.getElementById('lvGrid').innerHTML=g;show('levels');}
 function quitPlay(){stopVoice();clearInterval(timer);
-  if(challengeMode){challengeMode=false;showHome();return;}show('levels');openBook(curBook);}
+  let leave=challengeMode||babyMode||battleMode;
+  challengeMode=false;babyMode=false;battleMode=false;document.body.classList.remove('babymode');
+  if(leave){showHome();return;}show('levels');openBook(curBook);}
 
 /* =========================================================
    PLAY ENGINE
    ========================================================= */
 let qs=[],qi=0,correctCount=0,combo=0,answered=false,mazeStep=0,score=0,timer=null,timeLeft=0,timeTotal=0;
 let challengeMode=false,challengeDead=false,streak=0,bestStreak=0;
+var babyMode=false,battleMode=false,battlePlayers=[],battleTurn=0,battleRound=0,battleBook='A',battleCount=2;
 try{bestStreak=parseInt(localStorage.getItem('k2best')||'0')||0;}catch(e){}
 let recs={};try{recs=JSON.parse(localStorage.getItem('k2rec')||'{}');}catch(e){}
 function buildQuestions(){let types=BOOKS[curBook].units[curLevel].t,q=[];
   for(let i=0;i<QPER;i++)q.push(GEN[types[i%types.length]]());
   return shuffle(q);}
-function startLevel(i){curLevel=i;ensureAudio();challengeMode=false;challengeDead=false;
+function startLevel(i){curLevel=i;ensureAudio();challengeMode=false;challengeDead=false;battleMode=false;
+  babyMode=(curBook==='N');document.body.classList.toggle('babymode',babyMode);
   document.getElementById('rAgain').onclick=()=>startLevel(curLevel);
   document.getElementById('rBack').onclick=()=>{show('levels');openBook(curBook);};
+  document.getElementById('rNext').style.display='inline-block';
   qs=buildQuestions();qi=0;correctCount=0;combo=0;score=0;show('play');renderQ();}
-function startChallenge(){ensureAudio();challengeMode=true;challengeDead=false;
+function startChallenge(){ensureAudio();challengeMode=true;challengeDead=false;babyMode=false;battleMode=false;document.body.classList.remove('babymode');
   document.getElementById('rAgain').onclick=()=>startChallenge();
   document.getElementById('rBack').onclick=()=>{showHome();};
   qs=[];qi=0;correctCount=0;combo=0;score=0;streak=0;show('play');pushChallengeQ();renderQ();}
+function openBattleSetup(){stopVoice();show('battleSetup');updateBattleChoices();}
+function setBattlePlayers(n){battleCount=n;updateBattleChoices();}
+function setBattleBook(b){battleBook=b;updateBattleChoices();}
+function updateBattleChoices(){
+  document.querySelectorAll('#playerChoices .chip').forEach(b=>b.classList.toggle('sel',Number(b.textContent)===battleCount));
+  document.querySelectorAll('#bookChoices .chip').forEach(b=>b.classList.toggle('sel',b.dataset.b===battleBook));}
+function buildBattleQuestions(){let books=battleBook==='M'?['A','B','C']:[battleBook],q=[];
+  for(let r=0;r<QPER;r++)for(let p=0;p<battleCount;p++){
+    let b=pick(books),u=pick(BOOKS[b].units),type=pick(u.t);q.push(GEN[type]());}
+  return q;}
+function startBattle(){ensureAudio();challengeMode=false;challengeDead=false;babyMode=false;battleMode=true;document.body.classList.remove('babymode');
+  battlePlayers=Array.from({length:battleCount},()=>({score:0,correct:0}));battleTurn=0;battleRound=0;
+  document.getElementById('rAgain').onclick=()=>startBattle();
+  document.getElementById('rBack').onclick=()=>showHome();
+  document.getElementById('rNext').style.display='none';
+  qs=buildBattleQuestions();qi=0;correctCount=0;combo=0;score=0;show('play');renderQ();}
+function updateBattleBar(){let bar=document.getElementById('battleBar');if(!bar)return;
+  bar.classList.toggle('on',battleMode);if(!battleMode)return;
+  document.getElementById('battleWho').textContent=t('battleTurn',{n:battleTurn+1});
+  document.getElementById('battleList').innerHTML=battlePlayers.map((p,i)=>`<span class="${i===battleTurn?'sel':''}">P${i+1} <b>${p.score}</b></span>`).join('');}
+function endBattle(){clearInterval(timer);stopVoice();battleMode=false;document.body.classList.remove('babymode');
+  let ranked=battlePlayers.map((p,i)=>({...p,i})).sort((a,b)=>b.score-a.score);
+  document.getElementById('rTitle').textContent=t('battleEnd');
+  document.getElementById('rStars').innerHTML=ranked.map((p,k)=>`<div style="font-size:17px;font-weight:800;color:${k===0?'#e08a2b':'#4b6070'};margin:4px 0">${t('battleRank',{n:k+1,p:p.i+1,s:p.score})}</div>`).join('');
+  let winner=t('battleRank',{n:1,p:ranked[0].i+1,s:ranked[0].score});
+  document.getElementById('rScore').textContent=winner;
+  document.getElementById('rRec').innerHTML=`<div class="newrec">${winner}</div>`;
+  document.getElementById('rNext').style.display='none';
+  show('result');sfx('win');confetti();speak(LANG==='en'?('Player '+(ranked[0].i+1)+' wins!'):('玩家'+(ranked[0].i+1)+'勝出！'));}
 function pushChallengeQ(){let b=pick(['A','B','C']);curBook=b;curLevel=rand(0,BOOKS[b].units.length-1);
   let types=BOOKS[b].units[curLevel].t;qs.push(GEN[pick(types)]());}
 function endChallenge(){clearInterval(timer);challengeDead=false;
@@ -903,10 +1072,11 @@ function renderQ(){answered=false;mazeStep=0;clearInterval(timer);let q=qs[qi];c
   document.getElementById('qtitle').textContent=lt(q,'title');
   document.getElementById('scene').innerHTML=q.scene;
   document.getElementById('tip').className='tip';
-  document.getElementById('qno').textContent=qi+1;
+  document.getElementById('qno').textContent=battleMode?(battleRound+1):(qi+1);
+  if(battleMode){score=battlePlayers[battleTurn].score;updateBattleBar();}
   document.getElementById('scoreNow').textContent=score;
   let dots='';for(let i=0;i<qs.length;i++)dots+=`<div class="dot ${i<qi?'ok':i===qi?'cur':''}"></div>`;
-  document.getElementById('dots').innerHTML=challengeMode?'':dots;
+  document.getElementById('dots').innerHTML=(challengeMode||battleMode)?'':dots;
   updateCombo();
   if(q.mode==='maze'){document.getElementById('opts').innerHTML=`<div style="color:#7a8699;font-size:14px;margin-top:8px">${t('mazeTip')}</div>`;bindMaze(q);}
   else if(q.mode==='tapzone'){document.getElementById('opts').innerHTML=`<div style="color:#7a8699;font-size:14px;margin-top:8px">${t('tapzoneTip')}</div>`;bindTapZone(q);}
@@ -914,7 +1084,7 @@ function renderQ(){answered=false;mazeStep=0;clearInterval(timer);let q=qs[qi];c
   else renderOptions(q);
   startTimer(q);
   speak(lt(q,'speak'));}
-function timeLimit(q){if(challengeMode)return q.mode==='maze'?45:20;return q.mode==='maze'?60:q.mode==='tapzone'?35:30;}
+function timeLimit(q){if(babyMode)return 45;if(challengeMode)return q.mode==='maze'?45:20;if(battleMode)return q.mode==='maze'?40:25;return q.mode==='maze'?60:q.mode==='tapzone'?35:30;}
 function startTimer(q){timeTotal=timeLimit(q);timeLeft=timeTotal;
   let bar=document.getElementById('timefill');bar.style.width='100%';bar.className='timefill';
   let last=-1;clearInterval(timer);
@@ -979,6 +1149,11 @@ function showFb(ok,q,timeout){let fb=document.getElementById('fb');
 function next(){if(challengeMode){
     if(challengeDead){endChallenge();return;}
     streak++;qi++;pushChallengeQ();renderQ();return;}
+  if(battleMode){
+    qi++;battleTurn++;
+    if(battleTurn>=battlePlayers.length){battleTurn=0;battleRound++;}
+    if(qi>=qs.length){endBattle();return;}
+    score=battlePlayers[battleTurn].score;renderQ();return;}
   qi++;if(qi>=qs.length)endLevel();else renderQ();}
 function flash(){let d=document.createElement('div');d.className='flash';document.body.appendChild(d);setTimeout(()=>d.remove(),500);}
 function celebrate(btn,gain){
@@ -1033,11 +1208,29 @@ function superCelebrate(q){
   document.body.appendChild(layer);
   let wrap=document.querySelector('.wrap');if(wrap){wrap.classList.remove('screen-shake');void wrap.offsetWidth;wrap.classList.add('screen-shake');setTimeout(()=>wrap.classList.remove('screen-shake'),450);}
   setTimeout(()=>layer.remove(),2200);}
+function cuteSvg(kind,c){
+  if(kind==='heart')return `<svg viewBox="0 0 24 24"><path d="M12 22 C-3 12 4 2 12 8 C20 2 27 12 12 22Z" fill="${c}"/></svg>`;
+  if(kind==='star')return starSvg(c);
+  if(kind==='smile')return `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="${c}"/><circle cx="8" cy="10" r="1.5" fill="#fff"/><circle cx="16" cy="10" r="1.5" fill="#fff"/><path d="M7 14q5 5 10 0" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`;
+  return `<svg viewBox="0 0 24 32"><ellipse cx="12" cy="11" rx="9" ry="11" fill="${c}"/><path d="M12 22l-2 9 4-6" stroke="${c}" stroke-width="2" fill="none"/></svg>`;}
+function babyCelebrate(){
+  document.querySelectorAll('.cute-layer').forEach(n=>n.remove());
+  let layer=document.createElement('div');layer.className='cute-layer';
+  let word=document.createElement('div');word.className='cute-word';word.textContent=pick([t('babyCute'),t('mega1a'),t('mega1d')]);layer.appendChild(word);
+  let cols=['#e46ba8','#f2b32e','#3a86d4','#3fa64a','#8b5cf6','#f5822a'],kinds=['heart','star','smile','balloon'];
+  for(let i=0;i<34;i++){let d=document.createElement('div');d.className='cute';
+    d.style.left=Math.random()*100+'%';let s=22+Math.random()*30;d.style.width=s+'px';d.style.height=s+'px';
+    d.innerHTML=cuteSvg(pick(kinds),pick(cols));
+    d.style.animationDuration=(1.5+Math.random()*1.2)+'s';d.style.animationDelay=(Math.random()*.4)+'s';layer.appendChild(d);}
+  document.body.appendChild(layer);
+  let wrap=document.querySelector('.wrap');if(wrap){wrap.classList.remove('screen-shake');void wrap.offsetWidth;wrap.classList.add('screen-shake');setTimeout(()=>wrap.classList.remove('screen-shake'),450);}
+  setTimeout(()=>layer.remove(),2600);}
 function awardCorrect(el,q){answered=true;clearInterval(timer);correctCount++;combo++;
   let gain=10+(combo-1)*5;score+=gain;
+  if(battleMode){battlePlayers[battleTurn].score=score;battlePlayers[battleTurn].correct++;}
   if(el&&el.classList)el.classList.add('right');
   sfx('super');if(combo>=3)flash();
-  celebrate(el,gain);superCelebrate(q);updateCombo();
+  celebrate(el,gain);if(babyMode)babyCelebrate();else superCelebrate(q);updateCombo();
   document.getElementById('scoreNow').textContent=score;
   countCorrect();                       // accumulate toward trophy milestones
   let trophy=checkTrophy();             // trophy takes priority over gift to avoid overlap
