@@ -337,6 +337,61 @@ body.babymode .scene{background:radial-gradient(circle at 50% 30%,#fff0f7,#fff)}
 .tkddot.cur{background:var(--orange);border-color:var(--orange);color:#fff;box-shadow:0 3px 8px rgba(245,130,42,.3)}
 .tkdmove.bad{border-color:#f3b6b6;background:#fff4f4;opacity:.8}
 .tkdmove:active{transform:scale(.96)}
+/* ---- motion / follow-along practice ---- */
+.tkd-stage{position:relative}
+.tkd-arrow{fill:none;stroke:#e8742a;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:6 5;animation:dashMove .55s linear infinite}
+@keyframes dashMove{to{stroke-dashoffset:-22}}
+.tkd-practice{position:absolute;inset:0;display:none;align-items:center;justify-content:center;flex-direction:column;
+  background:rgba(255,249,238,.96);border-radius:14px;z-index:3}
+.tkd-practice.on{display:flex}
+.tkd-practice .cd{font-size:78px;font-weight:900;color:var(--orange);line-height:1.1;
+  text-shadow:0 4px 0 #fff,0 8px 16px rgba(245,130,42,.35);animation:cdPop .58s cubic-bezier(.2,1.6,.4,1)}
+@keyframes cdPop{0%{transform:scale(.2);opacity:0}40%{transform:scale(1.35);opacity:1}100%{transform:scale(1);opacity:.92}}
+.tkd-motionhint{text-align:center;font-size:12px;color:#b26a1c;font-weight:800;margin:2px 0 4px}
+/* ---- gentle encouragement after a wrong answer ---- */
+.enc-layer{position:fixed;inset:0;z-index:62;pointer-events:none;overflow:hidden}
+.enc-mascot{position:absolute;left:50%;bottom:7vh;transform:translateX(-50%);width:clamp(112px,30vw,172px);height:clamp(112px,30vw,172px);
+  animation:encIn .6s cubic-bezier(.2,1.7,.4,1),encIdle 1.1s .6s ease-in-out infinite alternate}
+.enc-mascot svg{width:100%;height:100%;display:block;filter:drop-shadow(0 8px 14px rgba(180,110,30,.28))}
+@keyframes encIn{0%{transform:translateX(-50%) scale(.2) rotate(-22deg);opacity:0}60%{transform:translateX(-50%) scale(1.2) rotate(8deg);opacity:1}100%{transform:translateX(-50%) scale(1) rotate(0)}}
+@keyframes encIdle{from{transform:translateX(-50%) translateY(0) rotate(-5deg)}to{transform:translateX(-50%) translateY(-11px) rotate(5deg)}}
+.enc-word{position:fixed;left:50%;top:19%;transform:translateX(-50%);white-space:nowrap;font-size:clamp(26px,6.5vw,44px);
+  font-weight:900;color:#e07a12;-webkit-text-stroke:2px #fff;text-shadow:0 5px 14px rgba(224,122,18,.35);animation:encWord 1.9s ease-out forwards}
+@keyframes encWord{0%{transform:translateX(-50%) scale(.3);opacity:0}24%{transform:translateX(-50%) scale(1.15);opacity:1}72%{opacity:1}100%{transform:translateX(-50%) scale(1);opacity:0}}
+.enc-spark{position:absolute;width:24px;height:24px;animation:encSpark 1.5s ease-out forwards}
+.enc-spark svg{width:100%;height:100%;display:block}
+@keyframes encSpark{0%{transform:translateY(0) scale(.4);opacity:0}20%{opacity:1}100%{transform:translateY(-95px) scale(1);opacity:0}}
+/* ---- extra success effects ---- */
+.cel-layer{position:fixed;inset:0;z-index:80;pointer-events:none;overflow:hidden}
+.cel-word{position:absolute;left:50%;top:18%;transform:translateX(-50%);white-space:nowrap;font-size:clamp(34px,8vw,62px);
+  font-weight:900;color:#fff;-webkit-text-stroke:3px #e2661a;text-shadow:0 6px 0 #d63b3b,0 10px 18px rgba(0,0,0,.22);
+  animation:celWord 1.6s cubic-bezier(.2,1.7,.4,1) forwards}
+@keyframes celWord{0%{transform:translateX(-50%) scale(0) rotate(-12deg);opacity:0}30%{transform:translateX(-50%) scale(1.2) rotate(5deg);opacity:1}
+  60%{transform:translateX(-50%) scale(.95) rotate(-2deg)}100%{transform:translateX(-50%) scale(1.05);opacity:0}}
+.cel-i{position:absolute;display:block;will-change:transform,opacity}
+.cel-i svg{width:100%;height:100%;display:block}
+.cel-rise{animation:celRise 1.7s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes celRise{0%{transform:translateY(0) rotate(0) scale(.6);opacity:0}15%{opacity:1}100%{transform:translateY(-118vh) rotate(420deg) scale(1);opacity:0}}
+.cel-fall{animation:celFall 1.5s linear forwards}
+@keyframes celFall{0%{transform:translateY(-14vh) rotate(0);opacity:1}100%{transform:translateY(110vh) rotate(680deg);opacity:.15}}
+.cel-ring{animation:celRing 1.05s ease-out forwards}
+@keyframes celRing{0%{transform:scale(.1);opacity:1}100%{transform:scale(3.6);opacity:0}}
+.cel-shoot{animation:celShoot 1.05s cubic-bezier(.2,.8,.3,1) forwards}
+@keyframes celShoot{0%{transform:translate(0,0) scale(.4);opacity:0}22%{opacity:1}100%{transform:translate(var(--sx),var(--sy)) scale(1.3);opacity:0}}
+.cel-bounce{animation:celBounce 1.1s ease-in-out infinite alternate}
+@keyframes celBounce{from{transform:translateY(0) rotate(-9deg)}to{transform:translateY(-22px) rotate(9deg)}}
+.cel-pop{animation:celPop 1.2s cubic-bezier(.2,1.7,.4,1) forwards}
+@keyframes celPop{0%{transform:translate(-50%,-50%) scale(0) rotate(-40deg);opacity:0}
+  45%{transform:translate(-50%,-50%) scale(1.25) rotate(8deg);opacity:1}100%{transform:translate(-50%,-50%) scale(1);opacity:0}}
+.cel-rainbow{position:absolute;left:50%;bottom:-30%;width:min(92vw,640px);height:min(46vw,320px);transform:translateX(-50%);
+  border-radius:50% 50% 0 0;background:linear-gradient(180deg,#e5484d 0 14%,#f5822a 14% 28%,#f2b32e 28% 42%,
+  #3fa64a 42% 56%,#3a86d4 56% 70%,#8b5cf6 70% 84%,#e46ba8 84% 100%);animation:celRainbow 1.6s ease-out forwards}
+@keyframes celRainbow{0%{transform:translateX(-50%) translateY(60%) scale(.6);opacity:0}35%{opacity:1}
+  100%{transform:translateX(-50%) translateY(-12%) scale(1.05);opacity:0}}
+.cel-rocket{animation:celRocket 1.4s cubic-bezier(.3,.1,.3,1) forwards}
+@keyframes celRocket{0%{transform:translateY(30vh) scale(.7);opacity:0}15%{opacity:1}100%{transform:translateY(-125vh) scale(1.25);opacity:0}}
+.cel-disco{position:absolute;inset:-40%;background:repeating-conic-gradient(from 0deg at 50% 45%,rgba(255,190,60,.75) 0 13deg,rgba(255,90,150,.6) 13deg 26deg,rgba(80,170,255,.6) 26deg 39deg,transparent 39deg 52deg);animation:celDisco 1.3s linear forwards}
+@keyframes celDisco{0%{transform:rotate(0) scale(.3);opacity:0}25%{opacity:.7}100%{transform:rotate(220deg) scale(1.4);opacity:0}}
 @media (max-width:480px){
   .card{gap:10px;padding:14px;border-radius:20px}
   .card .art{width:54px;height:54px;border-radius:16px}
@@ -542,12 +597,14 @@ const I18N={
   tkdTabLearn:'認動作',tkdTabOrder:'接順序',tkdTabFull:'打全套',
   tkdLearnIntro:'聽聲音，睇下呢一式係咩動作，點一下正確嘅火柴人。',
   tkdOrderIntro:'太極一章有 18 式。睇下邊個動作係下一式？',
-  tkdFullIntro:'跟住次序，一式一式打完整套！點「下一式」繼續，想重睇就點「上一式」。',
+  tkdFullIntro:'跟住次序，一式一式打完整套！點「跟我做」先睇火柴人郁動，再自己試；點「下一式」繼續，想重睇就點「上一式」。',
   tkdOrderQ:'第 {n} 式之後，下一式係？',tkdNext:'下一式 →',tkdPrev:'← 上一式',tkdStart:'開始打全套',
   tkdMove:'強',tkdDone:'成套打完！',tkdDoneSub:'太極一章 18 式全部記住，藍帶近咗一步！',
   tkdAgain:'再打一次',tkdStep:'第 {n} / 18 式',tkdTapMove:'點呢個動作',tkdTapHint:'點一下圖，再聽一次',
   tkdBelts:'腰帶會越練越高級，加油考藍帶！',tkdWhite:'白帶',tkdYellow:'黃帶',tkdGreen:'綠帶',tkdBlue:'藍帶',
-  tkdNice:'好叻！',tkdCheer:'繼續！',tkdListen:'再聽一次'
+  tkdNice:'好叻！',tkdCheer:'繼續！',tkdListen:'再聽一次',
+  tkdFollow:'跟我做',tkdGoMove:'開始！',tkdIDid:'我做到啦！',tkdMotionHint:'睇住橙色嘅手同腳點郁',
+  try1:'再試一次，你可以！',try2:'差少少，加油！',try3:'冇問題，再嚟一次！',try4:'你已經好叻啦！',try5:'睇清楚，再試！',try6:'加油，你可以嘅！'
  },
  en:{
   brand:'啟展數學樂園 / KeeGee Math Land',app:'KeeGee Math Land',sub:'K2 Games',
@@ -581,12 +638,14 @@ const I18N={
   tkdTabLearn:'Learn moves',tkdTabOrder:'Next move',tkdTabFull:'Full form',
   tkdLearnIntro:'Listen and find the move. Tap the correct pose.',
   tkdOrderIntro:'Taegeuk 1 has 18 moves. Which move comes next?',
-  tkdFullIntro:'Follow the order through all 18 moves. Tap Next to continue, or Prev to review.',
+  tkdFullIntro:'Follow the order through all 18 moves. Tap “Do with me” to watch the stick figure move, then try it yourself. Tap Next or Prev anytime.',
   tkdOrderQ:'After move {n}, what comes next?',tkdNext:'Next →',tkdPrev:'← Prev',tkdStart:'Start full form',
   tkdMove:'Strong',tkdDone:'Form complete!',tkdDoneSub:'You remembered all 18 moves. Blue belt is closer!',
   tkdAgain:'Do it again',tkdStep:'Move {n} / 18',tkdTapMove:'Tap this move',tkdTapHint:'Tap the picture to hear it again',
   tkdBelts:'Your belt gets higher as you train. Go for blue!',tkdWhite:'White',tkdYellow:'Yellow',tkdGreen:'Green',tkdBlue:'Blue',
-  tkdNice:'Great!',tkdCheer:'Keep going!',tkdListen:'Listen again'
+  tkdNice:'Great!',tkdCheer:'Keep going!',tkdListen:'Listen again',
+  tkdFollow:'Do with me',tkdGoMove:'GO!',tkdIDid:'I did it!',tkdMotionHint:'Watch the orange arm and leg move',
+  try1:'Try again, you can!',try2:'Almost! Keep going!',try3:'No worries, try once more!',try4:'You are doing great!',try5:'Look again and try!',try6:'Go for it!'
  }
 };
 function t(k,v){let r=(I18N[LANG]&&I18N[LANG][k])||I18N.zh[k]||k;
@@ -1249,18 +1308,59 @@ function updateCombo(){let el=document.getElementById('combo');
 function choose(i,btn,q){if(answered)return;sfx('tap');
   if(i===q.answer)awardCorrect(btn,q);
   else lockWrong(q,false);}
+const ENC_FACES=['sun','bear','star','dino','thumb','cloud'];
+let encSeq=0;
+function encSvg(kind){
+  const ink='#7a4a12',smile=(cx,cy)=>`<circle cx="${cx-5}" cy="${cy}" r="2.1" fill="${ink}"/><circle cx="${cx+5}" cy="${cy}" r="2.1" fill="${ink}"/><path d="M${cx-6} ${cy+6}q6 6 12 0" stroke="${ink}" stroke-width="2.2" fill="none" stroke-linecap="round"/>`;
+  if(kind==='sun'){
+    let rays='';for(let i=0;i<10;i++){let a=i*Math.PI/5;rays+=`<line x1="${50+Math.cos(a)*34}" y1="${50+Math.sin(a)*34}" x2="${50+Math.cos(a)*46}" y2="${50+Math.sin(a)*46}" stroke="#f2b32e" stroke-width="6" stroke-linecap="round"/>`;}
+    return `<svg viewBox="0 0 100 100">${rays}<circle cx="50" cy="50" r="31" fill="#ffd45e" stroke="#e8a71c" stroke-width="3"/>${smile(50,46)}<path d="M27 62q-13 4-16 15M73 62q13 4 16 15" stroke="#e8a71c" stroke-width="5" fill="none" stroke-linecap="round"/></svg>`;}
+  if(kind==='bear'){
+    return `<svg viewBox="0 0 100 100"><circle cx="27" cy="28" r="13" fill="#b98252" stroke="#8a5a2b" stroke-width="3"/><circle cx="73" cy="28" r="13" fill="#b98252" stroke="#8a5a2b" stroke-width="3"/>
+      <circle cx="27" cy="28" r="6" fill="#e8b98a"/><circle cx="73" cy="28" r="6" fill="#e8b98a"/>
+      <circle cx="50" cy="55" r="33" fill="#c99360" stroke="#8a5a2b" stroke-width="3"/><ellipse cx="50" cy="68" rx="15" ry="11" fill="#f0d3ae"/>
+      ${smile(50,48)}<ellipse cx="50" cy="62" rx="4" ry="3" fill="#8a5a2b"/>
+      <circle cx="26" cy="82" r="12" fill="#b98252" stroke="#8a5a2b" stroke-width="3"/><circle cx="74" cy="82" r="12" fill="#b98252" stroke="#8a5a2b" stroke-width="3"/></svg>`;}
+  if(kind==='star'){
+    return `<svg viewBox="0 0 100 100"><path d="M50 5L62 36 95 38 69 59 78 92 50 74 22 92 31 59 5 38 38 36Z" fill="#ffd45e" stroke="#e8a71c" stroke-width="4" stroke-linejoin="round"/>${smile(50,45)}</svg>`;}
+  if(kind==='dino'){
+    return `<svg viewBox="0 0 100 100"><path d="M18 78q4-24 22-28 4-22 24-20 20 2 18 24 8 6 4 24Z" fill="#6ec47a" stroke="#3a8a4a" stroke-width="3"/>
+      <path d="M30 50q-8-8-12-2 6 4 12 2M52 32q-6-9-12-5 5 5 12 5" fill="#4fae60"/>
+      <circle cx="62" cy="44" r="3" fill="#245c2e"/><circle cx="76" cy="44" r="3" fill="#245c2e"/><path d="M60 56q10 9 20 0" stroke="#245c2e" stroke-width="2.6" fill="none" stroke-linecap="round"/>
+      <path d="M26 76v12M46 78v11M70 76v12" stroke="#3a8a4a" stroke-width="7" stroke-linecap="round"/></svg>`;}
+  if(kind==='thumb'){
+    return `<svg viewBox="0 0 100 100"><path d="M34 46h13V22q0-7 7-7t7 7v24h17q8 0 6 9l-7 28q-2 8-11 8H42q-6 0-9-5L16 62q-5-7 2-12l16-4Z" fill="#6fb6e8" stroke="#2f78b0" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M42 82H30q-5 0-5-5v-9" fill="none" stroke="#2f78b0" stroke-width="3"/></svg>`;}
+  return `<svg viewBox="0 0 100 100"><path d="M8 78a42 42 0 0 1 84 0Z" fill="none" stroke="#e86a9c" stroke-width="8"/><path d="M20 78a30 30 0 0 1 60 0Z" fill="none" stroke="#f2b32e" stroke-width="8"/><path d="M32 78a18 18 0 0 1 36 0Z" fill="none" stroke="#6ec47a" stroke-width="8"/>
+    <ellipse cx="18" cy="80" rx="15" ry="11" fill="#fff" stroke="#d8dee8" stroke-width="2"/>${smile(18,78)}
+    <ellipse cx="82" cy="80" rx="15" ry="11" fill="#fff" stroke="#d8dee8" stroke-width="2"/>${smile(82,78)}</svg>`;
+}
+function encourage(){
+  document.querySelectorAll('.enc-layer').forEach(n=>n.remove());
+  let layer=document.createElement('div');layer.className='enc-layer';
+  let kind=ENC_FACES[encSeq++%ENC_FACES.length];
+  let m=document.createElement('div');m.className='enc-mascot';m.innerHTML=encSvg(kind);layer.appendChild(m);
+  let w=document.createElement('div');w.className='enc-word';w.textContent=t('try'+(1+(encSeq%6)));layer.appendChild(w);
+  for(let i=0;i<14;i++){
+    let s=document.createElement('div');s.className='enc-spark';
+    s.style.left=(5+Math.random()*90)+'%';s.style.top=(42+Math.random()*38)+'%';
+    s.style.animationDelay=(Math.random()*.55)+'s';
+    s.innerHTML=i%2?starSvg('#f2b32e'):cuteSvg('heart','#f28ab6');layer.appendChild(s);}
+  document.body.appendChild(layer);
+  setTimeout(()=>layer.remove(),2400);
+}
 function showFb(ok,q,timeout){let fb=document.getElementById('fb');
-  document.getElementById('fbIcon').innerHTML=ok?`<svg viewBox="0 0 24 24" fill="none" stroke="#3fa64a" stroke-width="3" stroke-linecap="round"><circle cx="12" cy="12" r="10" fill="#e9f8ec"/><path d="M7 12l3 3 7-7"/></svg>`:`<svg viewBox="0 0 24 24" fill="none" stroke="#e5484d" stroke-width="3" stroke-linecap="round"><circle cx="12" cy="12" r="10" fill="#fdecec"/><path d="M8 8l8 8M16 8l-8 8"/></svg>`;
+  document.getElementById('fbIcon').innerHTML=ok?`<svg viewBox="0 0 24 24" fill="none" stroke="#3fa64a" stroke-width="3" stroke-linecap="round"><circle cx="12" cy="12" r="10" fill="#e9f8ec"/><path d="M7 12l3 3 7-7"/></svg>`:`<svg viewBox="0 0 24 24" fill="none" stroke="#e59a1e" stroke-width="3" stroke-linecap="round"><circle cx="12" cy="12" r="10" fill="#fff3da"/><path d="M9 13a3.5 3.5 0 1 1 3.2 4.9M12 18l-3-3 3-3"/></svg>`;
   document.getElementById('fbMsg').textContent=ok?t('fbOk'):(timeout?t('fbTimeout'):t('fbWrong'));
-  document.getElementById('fbMsg').style.color=ok?'#3fa64a':'#e5484d';
+  document.getElementById('fbMsg').style.color=ok?'#3fa64a':'#d9881a';
   document.getElementById('fbSub').textContent=ok?(combo>=3?t('comboTip',{n:combo}):(lt(q,'tip')||'')):(t('ansPrefix')+answerText(q)+(lt(q,'tip')?'　'+lt(q,'tip'):''));
   fb.classList.toggle('cheer',ok);
   fb.classList.add('on');
   if(ok&&!giftBusy)fbs(combo>=5?'combo5':combo>=3?'combo3':'ok');
-  else if(!ok)speak(answerSpeech(q));
+  else if(!ok){encourage();fbs(timeout?'timeout':'wrong');setTimeout(()=>speak(answerSpeech(q)),1250);}
   setTimeout(()=>{fb.classList.remove('on','cheer');
     if(ok&&giftBusy){pendingNext=true;}
-    else next();},ok?1500:1800);}
+    else next();},ok?1500:2700);}
 function next(){if(challengeMode){
     if(challengeDead){endChallenge();return;}
     streak++;qi++;pushChallengeQ();renderQ();return;}
@@ -1298,16 +1398,31 @@ function celebrate(btn,gain){
     setTimeout(()=>s.remove(),900+i*80);}
   let f=document.createElement('div');f.className='floattxt';f.textContent='+'+gain;
   f.style.left=x+'px';f.style.top=(y-30)+'px';document.body.appendChild(f);setTimeout(()=>f.remove(),950);}
-function superCelebrate(q){
+const CELE_WORDS={
+ zh:['太棒了！','好叻呀！','真厲害！','你做到了！','超級棒！','一級棒！','嘩！好強！','好叻，繼續！'],
+ en:['Great job!','Well done!','Awesome!','You did it!','Fantastic!','Super star!','Wow, amazing!','Keep it up!']
+};
+let celeLast=-1;
+function celeSvg(kind,c){
+  if(kind==='star')return starSvg(c);
+  if(kind==='heart')return `<svg viewBox="0 0 24 24"><path d="M12 22 C-3 12 4 2 12 8 C20 2 27 12 12 22Z" fill="${c}"/></svg>`;
+  if(kind==='smile')return `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="${c}"/><circle cx="8" cy="10" r="1.5" fill="#fff"/><circle cx="16" cy="10" r="1.5" fill="#fff"/><path d="M7 14q5 5 10 0" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round"/></svg>`;
+  if(kind==='rocket')return `<svg viewBox="0 0 24 32"><path d="M12 1Q19 8 18 20L12 25 6 20Q5 8 12 1Z" fill="${c}"/><circle cx="12" cy="12" r="3.2" fill="#fff"/><path d="M6 18l-4 6 5-2M18 18l4 6-5-2" fill="#e5484d"/><path d="M10 25h4l-2 6Z" fill="#f5822a"/></svg>`;
+  if(kind==='balloon')return `<svg viewBox="0 0 24 34"><ellipse cx="12" cy="12" rx="9" ry="11" fill="${c}"/><path d="M12 23l-2 4 4 0Z" fill="${c}"/><path d="M12 27q4 3 0 6" stroke="#8a94a2" stroke-width="1.2" fill="none"/></svg>`;
+  if(kind==='crown')return `<svg viewBox="0 0 24 20"><path d="M2 16 4 5l6 5 2-8 2 8 6-5 2 11Z" fill="${c}" stroke="#c98a1c" stroke-width="1"/><rect x="2" y="15" width="20" height="3" rx="1.5" fill="#c98a1c"/></svg>`;
+  if(kind==='coin')return `<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="${c}" stroke="#c98a1c" stroke-width="2"/><path d="M12 6l1.8 4.2L18 12l-4.2 1.8L12 18l-1.8-4.2L6 12l4.2-1.8Z" fill="#fff6d0"/></svg>`;
+  if(kind==='note')return `<svg viewBox="0 0 24 24"><path d="M9 18V6l10-2v12" stroke="${c}" stroke-width="3" fill="none"/><circle cx="6" cy="18" r="3.5" fill="${c}"/><circle cx="16" cy="16" r="3.5" fill="${c}"/></svg>`;
+  if(kind==='chest')return `<svg viewBox="0 0 40 30"><path d="M4 14q0-9 16-9t16 9Z" fill="${c}" stroke="#8a5a2b" stroke-width="2"/><rect x="4" y="14" width="32" height="13" rx="3" fill="#b98252" stroke="#8a5a2b" stroke-width="2"/><rect x="17" y="12" width="6" height="10" rx="2" fill="#f2b32e" stroke="#8a5a2b" stroke-width="1.5"/></svg>`;
+  return `<svg viewBox="0 0 24 24"><path d="M12 2l2.5 7.5L22 12l-7.5 2.5L12 22l-2.5-7.5L2 12l7.5-2.5Z" fill="${c}"/></svg>`;
+}
+function megaCelebrate(word){
   document.querySelectorAll('.mega').forEach(n=>n.remove());
   let layer=document.createElement('div');layer.className='mega';
   layer.appendChild(Object.assign(document.createElement('div'),{className:'mega-flash'}));
   layer.appendChild(Object.assign(document.createElement('div'),{className:'mega-rays'}));
   let medal=document.createElement('div');medal.className='mega-medal';medal.innerHTML=medalSvg();layer.appendChild(medal);
-  let word=document.createElement('div');word.className='mega-word';
-  word.textContent=combo>=5?t('mega5'):combo>=3?pick([t('mega3a'),t('mega3b'),t('mega3c')]):pick([t('mega1a'),t('mega1b'),t('mega1c'),t('mega1d')]);layer.appendChild(word);
+  let w=document.createElement('div');w.className='mega-word';w.textContent=word;layer.appendChild(w);
   let cols=['#f2b32e','#e5484d','#3a86d4','#3fa64a','#8b5cf6','#f5822a','#ff8ac4'];
-  // rotate drop style each time: stars / bubbles / confetti / hearts — reduces repetition
   let style=pick(['star','bubble','confetti','heart']);
   let dropHtml=(c)=>{
     if(style==='star')return starSvg(c);
@@ -1321,8 +1436,81 @@ function superCelebrate(q){
     d.innerHTML=dropHtml(pick(cols));
     d.style.animationDuration=(1.1+Math.random()*.9)+'s';d.style.animationDelay=(Math.random()*.35)+'s';layer.appendChild(d);}
   document.body.appendChild(layer);
+  setTimeout(()=>layer.remove(),2200);
+}
+function celCelebrate(v,word){
+  const layer=document.createElement('div');layer.className='cel-layer';
+  const cols=['#f2b32e','#e5484d','#3a86d4','#3fa64a','#8b5cf6','#f5822a','#ff8ac4'];
+  const put=(cls,html,left,top,w,h,extra)=>{let d=document.createElement('div');d.className='cel-i '+cls;
+    d.style.left=left+'%';d.style.top=top+'%';d.style.width=w+'px';d.style.height=h+'px';
+    if(extra)extra(d);d.innerHTML=html;layer.appendChild(d);return d;};
+  if(v==='fireworks'){
+    for(let c=0;c<5;c++){
+      let cx=12+Math.random()*76,cy=20+Math.random()*45;
+      for(let r=0;r<2;r++){let ring=document.createElement('div');ring.className='cel-i cel-ring';
+        ring.style.left=cx+'%';ring.style.top=cy+'%';ring.style.width='40px';ring.style.height='40px';
+        ring.style.borderColor=pick(cols);ring.style.animationDelay=(r*.22)+'s';layer.appendChild(ring);}
+      for(let i=0;i<12;i++){let a=i*Math.PI/6,rad=70+Math.random()*70;
+        put('cel-shoot',celeSvg(pick(['star','heart','spark']),pick(cols)),cx,cy,14+Math.random()*10,14+Math.random()*10,d=>{
+          d.style.setProperty('--sx',Math.round(Math.cos(a)*rad)+'px');d.style.setProperty('--sy',Math.round(Math.sin(a)*rad)+'px');
+          d.style.animationDelay=(Math.random()*.2)+'s';});}
+    }
+  }else if(v==='rainbow'){
+    let rb=document.createElement('div');rb.className='cel-rainbow';layer.appendChild(rb);
+    for(let i=0;i<34;i++)put('cel-fall',celeSvg(pick(['star','heart','smile']),pick(cols)),Math.random()*100,-5,
+      16+Math.random()*20,16+Math.random()*20,d=>{d.style.animationDuration=(1.1+Math.random()*.9)+'s';d.style.animationDelay=(Math.random()*.5)+'s';});
+  }else if(v==='rocket'){
+    let r=document.createElement('div');r.className='cel-i cel-rocket';r.style.left='44%';r.style.top='0';
+    r.style.width='90px';r.style.height='130px';r.innerHTML=celeSvg('rocket','#3a86d4');layer.appendChild(r);
+    for(let i=0;i<30;i++)put('cel-rise',celeSvg(pick(['star','spark']),pick(cols)),40+Math.random()*20,60+Math.random()*35,
+      12+Math.random()*16,12+Math.random()*16,d=>{d.style.animationDelay=(Math.random()*.8)+'s';});
+  }else if(v==='balloons'){
+    for(let i=0;i<16;i++)put('cel-rise',celeSvg('balloon',pick(cols)),Math.random()*100,70+Math.random()*28,
+      30+Math.random()*22,42+Math.random()*28,d=>{d.style.animationDuration=(1.6+Math.random()*1.1)+'s';d.style.animationDelay=(Math.random()*.6)+'s';});
+    for(let i=0;i<14;i++)put('cel-shoot',celeSvg('star','#f2b32e'),45+Math.random()*10,45,18,18,d=>{
+      d.style.setProperty('--sx',Math.round((Math.random()-.5)*400)+'px');d.style.setProperty('--sy',Math.round((Math.random()-.5)*240)+'px');});
+  }else if(v==='disco'){
+    let d=document.createElement('div');d.className='cel-disco';layer.appendChild(d);
+    for(let i=0;i<32;i++)put('cel-bounce',celeSvg(pick(['star','heart','smile']),pick(cols)),Math.random()*96,35+Math.random()*55,
+      22+Math.random()*18,22+Math.random()*18,d=>{d.style.animationDelay=(Math.random()*.5)+'s';});
+    put('cel-pop',celeSvg('crown','#ffd45e'),50,48,150,150);
+  }else if(v==='coins'){
+    for(let i=0;i<44;i++)put('cel-fall',celeSvg('coin','#f2b32e'),Math.random()*100,-8,
+      18+Math.random()*18,18+Math.random()*18,d=>{d.style.animationDuration=(1+Math.random()*.9)+'s';d.style.animationDelay=(Math.random()*.6)+'s';});
+    put('cel-pop',celeSvg('crown','#ffd45e'),50,46,160,160);
+  }else if(v==='dance'){
+    const faces=['#f28ab6','#f2b32e','#6ec47a','#6fb6e8','#b48cf0'];
+    faces.forEach((c,i)=>put('cel-bounce',celeSvg('smile',c),12+i*19,58+((i%2)*4),52,52,d=>{d.style.animationDelay=(i*.12)+'s';}));
+    for(let i=0;i<20;i++)put('cel-rise',celeSvg('note',pick(cols)),Math.random()*100,55+Math.random()*40,
+      18+Math.random()*12,18+Math.random()*12,d=>{d.style.animationDelay=(Math.random()*.7)+'s';});
+  }else if(v==='meteor'){
+    for(let i=0;i<12;i++)put('cel-shoot',celeSvg(pick(['star','spark']),pick(cols)),-5+Math.random()*30,5+Math.random()*45,
+      24+Math.random()*20,24+Math.random()*20,d=>{
+        d.style.setProperty('--sx',Math.round(300+Math.random()*500)+'px');d.style.setProperty('--sy',Math.round(120+Math.random()*260)+'px');
+        d.style.animationDelay=(i*.09)+'s';});
+    for(let i=0;i<20;i++)put('cel-rise',celeSvg('star','#f2b32e'),Math.random()*100,60+Math.random()*30,
+      14+Math.random()*14,14+Math.random()*14,d=>{d.style.animationDelay=(Math.random()*.6)+'s';});
+  }else{
+    for(let r=0;r<3;r++){let ring=document.createElement('div');ring.className='cel-i cel-ring';ring.style.left='50%';
+      ring.style.top='48%';ring.style.width='60px';ring.style.height='60px';ring.style.borderColor='#f2b32e';
+      ring.style.animationDelay=(r*.18)+'s';layer.appendChild(ring);}
+    put('cel-pop',celeSvg('chest','#c99360'),50,48,180,150);
+    for(let i=0;i<38;i++)put('cel-fall',celeSvg('coin','#f2b32e'),20+Math.random()*60,28+Math.random()*22,
+      16+Math.random()*16,16+Math.random()*16,d=>{d.style.animationDuration=(1.2+Math.random()*.8)+'s';d.style.animationDelay=(Math.random()*.5)+'s';});
+  }
+  let w=document.createElement('div');w.className='cel-word';w.textContent=word;layer.appendChild(w);
+  document.body.appendChild(layer);
+  setTimeout(()=>layer.remove(),2300);
+}
+function superCelebrate(q){
+  document.querySelectorAll('.mega,.cel-layer').forEach(n=>n.remove());
+  const V=['rays','fireworks','rainbow','rocket','balloons','disco','coins','dance','meteor','treasure'];
+  let k;do{k=Math.floor(Math.random()*V.length);}while(V.length>1&&k===celeLast);
+  celeLast=k;
+  const word=combo>=5?t('mega5'):combo>=3?pick([t('mega3a'),t('mega3b'),t('mega3c')]):pick(CELE_WORDS[LANG]||CELE_WORDS.zh);
+  if(V[k]==='rays')megaCelebrate(word);else celCelebrate(V[k],word);
   let wrap=document.querySelector('.wrap');if(wrap){wrap.classList.remove('screen-shake');void wrap.offsetWidth;wrap.classList.add('screen-shake');setTimeout(()=>wrap.classList.remove('screen-shake'),450);}
-  setTimeout(()=>layer.remove(),2200);}
+}
 function cuteSvg(kind,c){
   if(kind==='heart')return `<svg viewBox="0 0 24 24"><path d="M12 22 C-3 12 4 2 12 8 C20 2 27 12 12 22Z" fill="${c}"/></svg>`;
   if(kind==='star')return starSvg(c);
@@ -1332,7 +1520,17 @@ function babyCelebrate(){
   document.querySelectorAll('.cute-layer').forEach(n=>n.remove());
   let layer=document.createElement('div');layer.className='cute-layer';
   let word=document.createElement('div');word.className='cute-word';word.textContent=pick([t('babyCute'),t('mega1a'),t('mega1d')]);layer.appendChild(word);
-  let cols=['#e46ba8','#f2b32e','#3a86d4','#3fa64a','#8b5cf6','#f5822a'],kinds=['heart','star','smile','balloon'];
+  let cols=['#e46ba8','#f2b32e','#3a86d4','#3fa64a','#8b5cf6','#f5822a'];
+  let scene=pick(['fall','rainbow','pop','dance']);
+  let kinds=scene==='rainbow'?['star','heart']:scene==='pop'?['star','smile']:scene==='dance'?['smile','balloon']:['heart','star','smile','balloon'];
+  if(scene==='rainbow')layer.appendChild(Object.assign(document.createElement('div'),{className:'cel-rainbow'}));
+  if(scene==='pop'){
+    let p=document.createElement('div');p.className='cel-i cel-pop';p.style.left='50%';p.style.top='46%';
+    p.style.width='150px';p.style.height='150px';p.innerHTML=cuteSvg('smile','#e46ba8');layer.appendChild(p);}
+  if(scene==='dance')['#e46ba8','#f2b32e','#3fa64a','#3a86d4'].forEach((c,i)=>{
+    let d=document.createElement('div');d.className='cel-i cel-bounce';d.style.left=(15+i*22)+'%';
+    d.style.top='58%';d.style.width='52px';d.style.height='52px';d.style.animationDelay=(i*.12)+'s';
+    d.innerHTML=cuteSvg('smile',c);layer.appendChild(d);});
   for(let i=0;i<34;i++){let d=document.createElement('div');d.className='cute';
     d.style.left=Math.random()*100+'%';let s=22+Math.random()*30;d.style.width=s+'px';d.style.height=s+'px';
     d.innerHTML=cuteSvg(pick(kinds),pick(cols));
@@ -1418,47 +1616,80 @@ const TKD18=[
  {pose:'low',  zh:'右轉下段防禦',   en:'Turn right, low block',    say:'第十七式，右轉下段防禦。'},
  {pose:'punch',zh:'上步沖拳，發聲', en:'Step forward, punch, kihap',say:'第十八式，上步沖拳，發聲！'}
 ];
-function tkdFigure(pose,belt){
+/* Joint model: every pose is a set of interpolatable coordinates, so the
+   stick figure can physically MOVE from one move to the next instead of
+   flipping between static pictures. Orange marks the limb in action. */
+const TKD_FIG={
+  ready:{act:[50,40,56,60,58,76],rest:[50,40,44,60],legA:[50,72,40,110],legB:[50,72,60,110,60,110],kick:0,hi:0,spd:0},
+  low:  {act:[45,40,36,57,41,80],rest:[57,40,67,58],legA:[50,72,38,110],legB:[50,72,62,110,62,110],kick:0,hi:1,spd:0},
+  punch:{act:[57,40,72,43,88,45],rest:[43,40,55,60],legA:[50,72,38,110],legB:[50,72,62,110,62,110],kick:0,hi:1,spd:1},
+  inner:{act:[43,40,32,54,57,45],rest:[57,40,67,59],legA:[50,72,38,110],legB:[50,72,62,110,62,110],kick:0,hi:1,spd:0},
+  high: {act:[43,40,38,25,45,5], rest:[57,40,67,59],legA:[50,72,38,110],legB:[50,72,62,110,62,110],kick:0,hi:1,spd:0},
+  kick: {act:[43,40,36,56,36,56],rest:[57,40,67,54],legA:[50,72,41,110],legB:[50,72,72,57,92,63],kick:1,hi:0,spd:0}
+};
+function figLerp(a,b,t){return a.map((v,i)=>v+(b[i]-v)*t);}
+function figMix(A,B,t){
+  const o={};['act','rest','legA','legB'].forEach(k=>o[k]=figLerp(A[k],B[k],t));
+  ['kick','hi','spd'].forEach(k=>o[k]=A[k]+(B[k]-A[k])*t);return o;
+}
+function tkdFigureJ(F,belt){
   belt=belt||'#2f6fd0';
   const ink='#26313f',hi='#e8742a',halo='#fff';
-  // stick limb: white halo underneath so it reads on any background
-  const L=(x1,y1,x2,y2,c,w)=>{w=w||7;return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${halo}" stroke-width="${w+5}" stroke-linecap="round"/><line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${c}" stroke-width="${w}" stroke-linecap="round"/>`;};
+  const n=v=>(+v).toFixed(1);
+  // white halo underneath so every limb reads on any background
+  const L=(x1,y1,x2,y2,c,w,op)=>{w=w||7;op=(op===undefined?1:op);
+    return `<line x1="${n(x1)}" y1="${n(y1)}" x2="${n(x2)}" y2="${n(y2)}" stroke="${halo}" stroke-width="${w+5}" stroke-linecap="round" opacity="${op}"/>`+
+           `<line x1="${n(x1)}" y1="${n(y1)}" x2="${n(x2)}" y2="${n(y2)}" stroke="${c}" stroke-width="${w}" stroke-linecap="round" opacity="${op}"/>`;};
+  const foot=(x,y,c,op)=>`<line x1="${n(x-7)}" y1="${n(y)}" x2="${n(x+7)}" y2="${n(y)}" stroke="${c}" stroke-width="6" stroke-linecap="round" opacity="${op}"/>`;
   let s='<line x1="10" y1="114" x2="90" y2="114" stroke="#dbe3ec" stroke-width="3" stroke-linecap="round"/>';
-  // legs
-  if(pose==='kick'){
-    s+=L(50,72,41,110,ink,7);
-    s+=`<line x1="33" y1="110" x2="47" y2="110" stroke="${ink}" stroke-width="6" stroke-linecap="round"/>`;
-    s+=L(50,72,72,57,hi,7)+L(72,57,92,63,hi,7);
-  }else{
-    s+=L(50,72,38,110,ink,7)+L(50,72,62,110,ink,7);
-    s+=`<line x1="31" y1="110" x2="45" y2="110" stroke="${ink}" stroke-width="6" stroke-linecap="round"/><line x1="55" y1="110" x2="69" y2="110" stroke="${ink}" stroke-width="6" stroke-linecap="round"/>`;
-  }
+  // legs — the second leg bends into a kick as F.kick rises
+  s+=L(F.legA[0],F.legA[1],F.legA[2],F.legA[3],ink,7)+foot(F.legA[2],F.legA[3],ink,1);
+  const lc=F.kick>.5?hi:ink;
+  s+=L(F.legB[0],F.legB[1],F.legB[2],F.legB[3],lc,7);
+  s+=L(F.legB[2],F.legB[3],F.legB[4],F.legB[5],lc,7);
+  s+=foot(F.legB[4],F.legB[5],lc,1);
   // torso, belt, head
   s+=L(50,30,50,72,ink,7);
   s+=`<rect x="35" y="62" width="30" height="7" rx="3" fill="${belt}" stroke="${ink}" stroke-width="2"/>`;
   s+=`<circle cx="50" cy="18" r="10.5" fill="#ffe7c8" stroke="${ink}" stroke-width="4"/>`;
   s+=`<circle cx="46.5" cy="16.5" r="1.7" fill="${ink}"/><circle cx="53.5" cy="16.5" r="1.7" fill="${ink}"/>`;
   s+=`<path d="M46.5 22 Q50 25 53.5 22" stroke="${ink}" stroke-width="1.8" fill="none" stroke-linecap="round"/>`;
-  // arms (acting limb in orange)
-  if(pose==='low'){
-    s+=L(57,40,67,58,ink,7);
-    s+=L(45,40,36,57,ink,7)+L(36,57,41,80,hi,7);
-  }else if(pose==='punch'){
-    s+=L(43,40,55,60,ink,7);
-    s+=L(57,40,88,45,hi,7);
-    s+=`<line x1="84" y1="32" x2="95" y2="27" stroke="${hi}" stroke-width="3.2" stroke-linecap="round"/><line x1="86" y1="57" x2="97" y2="60" stroke="${hi}" stroke-width="3.2" stroke-linecap="round"/>`;
-  }else if(pose==='inner'){
-    s+=L(57,40,67,59,ink,7);
-    s+=L(43,40,32,54,ink,7)+L(32,54,57,45,hi,7);
-  }else if(pose==='high'){
-    s+=L(57,40,67,59,ink,7);
-    s+=L(43,40,38,25,ink,7)+L(38,25,45,5,hi,7);
-  }else if(pose==='kick'){
-    s+=L(43,40,36,56,ink,7)+L(57,40,67,54,ink,7);
-  }
+  // arms — the working limb is orange
+  const ac=F.hi>.5?hi:ink;
+  s+=L(F.rest[0],F.rest[1],F.rest[2],F.rest[3],ink,7);
+  s+=L(F.act[0],F.act[1],F.act[2],F.act[3],ac,7)+L(F.act[2],F.act[3],F.act[4],F.act[5],ac,7);
+  if(F.spd>.15){const hx=F.act[4],hy=F.act[5],op=Math.min(1,F.spd);
+    s+=`<line x1="${n(hx-6)}" y1="${n(hy-12)}" x2="${n(hx+7)}" y2="${n(hy-16)}" stroke="${hi}" stroke-width="3.2" stroke-linecap="round" opacity="${op}"/>`+
+       `<line x1="${n(hx-6)}" y1="${n(hy+11)}" x2="${n(hx+8)}" y2="${n(hy+15)}" stroke="${hi}" stroke-width="3.2" stroke-linecap="round" opacity="${op}"/>`;}
   return s;
 }
+function tkdFigure(pose,belt){return tkdFigureJ(TKD_FIG[pose]||TKD_FIG.ready,belt);}
 function tkdSvg(pose,w,h,belt){return `<svg viewBox="0 0 100 120" width="${w||70}" height="${h||84}">${tkdFigure(pose,belt)}</svg>`;}
+function tkdArrow(from,to){
+  const A=TKD_FIG[from]||TKD_FIG.ready,B=TKD_FIG[to]||TKD_FIG.ready;
+  const useLeg=(from==='kick'||to==='kick');
+  const x1=useLeg?A.legB[4]:A.act[4],y1=useLeg?A.legB[5]:A.act[5];
+  const x2=useLeg?B.legB[4]:B.act[4],y2=useLeg?B.legB[5]:B.act[5];
+  if(Math.abs(x1-x2)<3&&Math.abs(y1-y2)<3)return '';
+  const mx=(x1+x2)/2,my=(y1+y2)/2-16,n=v=>(+v).toFixed(1);
+  return `<path class="tkd-arrow" d="M${n(x1)} ${n(y1)} Q${n(mx)} ${n(my)} ${n(x2)} ${n(y2)}"/>`+
+    `<path d="M${n(x2-6)} ${n(y2-6)} L${n(x2)} ${n(y2)} L${n(x2-7)} ${n(y2+3)}" fill="none" stroke="#e8742a" stroke-width="3" stroke-linecap="round"/>`;
+}
+let tkdAnim=null;
+function tkdAnimate(el,from,to,belt,dur,cb){
+  if(!el)return;
+  if(tkdAnim){cancelAnimationFrame(tkdAnim);tkdAnim=null;}
+  const A=TKD_FIG[from]||TKD_FIG.ready,B=TKD_FIG[to]||TKD_FIG.ready;
+  const t0=performance.now(),D=dur||820;
+  const step=now=>{
+    let p=Math.min(1,(now-t0)/D),e=p<.5?2*p*p:1-Math.pow(-2*p+2,2)/2;
+    el.innerHTML=tkdFigureJ(figMix(A,B,e),belt)+tkdArrow(from,to);
+    if(p<1)tkdAnim=requestAnimationFrame(step);
+    else{tkdAnim=null;el.innerHTML=tkdFigureJ(B,belt);if(cb)cb();}
+  };
+  tkdAnim=requestAnimationFrame(step);
+}
+function tkdSvgId(pose,id,w,h){return `<svg id="${id}" viewBox="0 0 100 120" width="${w||70}" height="${h||84}">${tkdFigure(pose)}</svg>`;}
 let tkdMode='learn',tkdQ=null,tkdAnswered=false,tkdFullStep=0,tkdProg=0;
 try{tkdProg=parseInt(localStorage.getItem('tkdProg')||'0',10)||0;}catch(e){}
 function tkdSave(){try{localStorage.setItem('tkdProg',String(tkdProg));}catch(e){}}
@@ -1486,6 +1717,7 @@ function tkdNewLearn(){
   document.getElementById('tkdBody').innerHTML=
     '<div class="tkd-intro" data-i18n="tkdLearnIntro">'+t('tkdLearnIntro')+'</div>'+
     '<div class="pose-hero tkd-tap" style="padding:14px 12px" onclick="tkdSayLearn()"><div style="font-size:40px;font-weight:900;color:#e59a1e;line-height:1">?</div><button class="tkd-btn" style="font-size:15px;padding:9px 20px;margin-top:6px" onclick="event.stopPropagation();tkdSayLearn()">'+spk+' '+t('tkdListen')+'</button></div>'+
+    '<div class="tkd-motionhint" data-i18n="tkdMotionHint">'+t('tkdMotionHint')+'</div>'+
     '<div class="tkd-moves" id="tkdOpts">'+tkdOptsHtml(tkdQ.opts,false)+'</div>';
   tkdSayLearn();
 }
@@ -1497,11 +1729,18 @@ function tkdNewOrder(){
   document.getElementById('tkdBody').innerHTML=
     '<div class="tkd-intro" data-i18n="tkdOrderIntro">'+t('tkdOrderIntro')+'</div>'+
     '<div class="tkd-count">'+t('tkdStep',{n:m})+'</div>'+
-    '<div class="pose-hero tkd-tap" style="display:flex;align-items:center;justify-content:center;gap:14px" onclick="speak(TKD18['+(m-1)+'].say)">'+tkdSvg(cur.pose,92,110)+
+    '<div class="pose-hero tkd-tap" style="display:flex;align-items:center;justify-content:center;gap:14px" onclick="tkdReplayOrder('+(m-1)+')">'+tkdSvgId(cur.pose,'tkdOrderSvg',92,110)+
       '<div style="text-align:left"><div style="font-size:15px;font-weight:800;color:#b26a1c">'+(LANG==='en'?cur.en:cur.zh)+'</div><div class="tkd-taphint" style="text-align:left">'+t('tkdTapHint')+'</div></div></div>'+
     '<div class="tkd-intro" style="font-weight:800;color:#b26a1c;font-size:15px">'+t('tkdOrderQ',{n:m})+'</div>'+
     '<div class="tkd-moves" id="tkdOpts">'+tkdOptsHtml(tkdQ.opts,false)+'</div>';
+  tkdAnimate(document.getElementById('tkdOrderSvg'),TKD18[Math.max(0,m-2)].pose,cur.pose,'#2f6fd0',700);
   speak('下一式係咩動作呀？');
+}
+function tkdReplayOrder(k){
+  if(!TKD18[k])return;
+  const svg=document.getElementById('tkdOrderSvg');
+  if(svg&&k>0)tkdAnimate(svg,TKD18[k-1].pose,TKD18[k].pose,'#2f6fd0',780);
+  speak(TKD18[k].say);
 }
 function tkdPick(i){
   if(tkdAnswered||!tkdQ)return;
@@ -1509,24 +1748,59 @@ function tkdPick(i){
   if(tkdQ.opts[i]===tkdQ.ans){
     tkdAnswered=true;
     if(cells[i])cells[i].classList.add('done');
+    const sv=cells[i]&&cells[i].querySelector('svg');
+    if(sv)tkdAnimate(sv,'ready',tkdQ.ans,'#2f6fd0',620);
     tkdProg++;tkdSave();renderBelt();
-    sfx('super');fbs('ok');
-    setTimeout(()=>{if(tkdMode==='learn')tkdNewLearn();else if(tkdMode==='order')tkdNewOrder();},1400);
+    sfx('super');fbs('ok');superCelebrate();
+    setTimeout(()=>{if(tkdMode==='learn')tkdNewLearn();else if(tkdMode==='order')tkdNewOrder();},1700);
   }else{
-    // show the right one instead of leaving the child stuck
+    // show the right one instead of leaving the child stuck — and show its movement
     tkdAnswered=true;
     if(cells[i])cells[i].classList.add('bad');
     const ai=tkdQ.opts.indexOf(tkdQ.ans);
-    if(cells[ai])cells[ai].classList.add('done');
-    sfx('tap');fbs('wrong');
-    speak(TKD_POSES[tkdQ.ans].say);
-    setTimeout(()=>{if(tkdMode==='learn')tkdNewLearn();else if(tkdMode==='order')tkdNewOrder();},2000);
+    if(cells[ai]){cells[ai].classList.add('done');
+      const sv=cells[ai].querySelector('svg');if(sv)tkdAnimate(sv,'ready',tkdQ.ans,'#2f6fd0',620);}
+    sfx('tap');encourage();fbs('wrong');
+    setTimeout(()=>speak(TKD_POSES[tkdQ.ans].say),1250);
+    setTimeout(()=>{if(tkdMode==='learn')tkdNewLearn();else if(tkdMode==='order')tkdNewOrder();},3150);
   }
 }
 function tkdStartFull(){tkdFullStep=0;tkdRenderFull();}
 function tkdJump(k){tkdFullStep=Math.max(0,Math.min(TKD18.length-1,k));sfx('tap');tkdRenderFull();}
 function tkdPrevFull(){if(tkdFullStep>0){tkdFullStep--;sfx('tap');tkdRenderFull();}}
-function tkdReplay(){if(TKD18[tkdFullStep])speak(TKD18[tkdFullStep].say);sfx('tap');}
+function tkdReplay(){
+  const i=tkdFullStep;if(!TKD18[i])return;
+  const svg=document.getElementById('tkdHeroSvg');
+  if(svg&&i>0)tkdAnimate(svg,TKD18[i-1].pose,TKD18[i].pose,'#2f6fd0',820);
+  speak(TKD18[i].say);sfx('tap');
+}
+function tkdFollow(){
+  const i=tkdFullStep;if(!TKD18[i])return;
+  const layer=document.getElementById('tkdPrac');if(!layer)return;
+  stopVoice();layer.classList.add('on');sfx('tap');
+  let n=3;layer.innerHTML='<div class="cd">3</div>';
+  let iv=setInterval(()=>{
+    n--;
+    if(n>0){layer.innerHTML='<div class="cd">'+n+'</div>';sfx('tap');return;}
+    clearInterval(iv);
+    layer.innerHTML='<div class="cd" style="font-size:clamp(30px,8vw,50px)">'+t('tkdGoMove')+'</div>';
+    sfx('super');
+    let shown=false;
+    const showDone=()=>{
+      if(shown)return;shown=true;
+      speak(TKD18[i].say);
+      layer.innerHTML='<button class="tkd-btn" style="font-size:19px;padding:14px 28px" onclick="event.stopPropagation();tkdIDid()">'+t('tkdIDid')+'</button>';
+    };
+    tkdAnimate(document.getElementById('tkdHeroSvg'),TKD18[Math.max(0,i-1)].pose,TKD18[i].pose,'#2f6fd0',900,showDone);
+    setTimeout(showDone,1500);   // fallback: background tabs may throttle animation frames
+  },650);
+}
+function tkdIDid(){
+  const layer=document.getElementById('tkdPrac');if(layer)layer.classList.remove('on');
+  sfx('super');fbs('ok');superCelebrate();
+  tkdProg++;tkdSave();renderBelt();
+  setTimeout(()=>tkdNextFull(),1350);
+}
 function tkdRenderFull(){
   if(tkdFullStep>=TKD18.length){
     tkdProg+=18;tkdSave();renderBelt();sfx('win');confetti();fbs('trophy');
@@ -1541,16 +1815,20 @@ function tkdRenderFull(){
   document.getElementById('tkdBody').innerHTML=
     '<div class="tkd-intro" data-i18n="tkdFullIntro">'+t('tkdFullIntro')+'</div>'+
     '<div class="tkd-count">'+t('tkdStep',{n:i+1})+'</div>'+
-    '<div class="pose-hero tkd-tap" onclick="tkdReplay()">'+
+    '<div class="pose-hero tkd-tap tkd-stage" onclick="tkdReplay()">'+
       '<div class="tkd-movename">'+(LANG==='en'?mv.en:mv.zh)+'</div>'+
-      tkdSvg(mv.pose,150,180)+
+      tkdSvgId(mv.pose,'tkdHeroSvg',150,180)+
+      '<div class="tkd-motionhint" data-i18n="tkdMotionHint">'+t('tkdMotionHint')+'</div>'+
       '<div class="tkd-taphint" data-i18n="tkdTapHint">'+t('tkdTapHint')+'</div>'+
+      '<div class="tkd-practice" id="tkdPrac"></div>'+
     '</div>'+
     '<div class="tkd-ctrl">'+
       '<button class="tkd-btn ghost'+(i===0?' dis':'')+'" onclick="tkdPrevFull()">'+t('tkdPrev')+'</button>'+
+      '<button class="tkd-btn" style="background:#e59a1e;box-shadow:0 5px 14px rgba(229,154,30,.32)" onclick="tkdFollow()">'+t('tkdFollow')+'</button>'+
       '<button class="tkd-btn" onclick="tkdNextFull()">'+(i===TKD18.length-1?t('tkdDone'):t('tkdNext'))+'</button>'+
     '</div>'+
     '<div class="tkddots">'+dots+'</div>';
+  if(i>0)tkdAnimate(document.getElementById('tkdHeroSvg'),TKD18[i-1].pose,mv.pose,'#2f6fd0',700);
   speak(mv.say);
 }
 function tkdNextFull(){if(tkdFullStep<TKD18.length){tkdFullStep++;sfx('tap');tkdRenderFull();}}
